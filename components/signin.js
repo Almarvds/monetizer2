@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie'
 import { NextAuth } from 'next-auth/client'
 
 export default class extends React.Component {
-  
+
   constructor(props) {
     super(props)
     this.state = {
@@ -16,9 +16,9 @@ export default class extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
-    
+
   }
-  
+
   handleEmailChange(event) {
     this.setState({
       email: event.target.value.trim()
@@ -27,13 +27,13 @@ export default class extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    
+
     if (!this.state.email) return
 
     this.setState({
       submitting: true
     })
-    
+
     // Save current URL so user is redirected back here after signing in
     const cookies = new Cookies()
     cookies.set('redirect_url', window.location.pathname, { path: '/' })
@@ -46,7 +46,7 @@ export default class extends React.Component {
       Router.push(`/auth/error?action=signin&type=email&email=${this.state.email}`)
     })
   }
-  
+
   render() {
     if (this.props.session.user) {
       return(<div/>)
@@ -63,7 +63,7 @@ export default class extends React.Component {
                 <Input name="_csrf" type="hidden" value={this.state.session.csrfToken}/>
                 <p>
                   <Label htmlFor="email">Email address</Label><br/>
-                  <Input name="email" disabled={this.state.submitting} type="text" placeholder="j.smith@example.com" id="email" className="form-control" value={this.state.email} onChange={this.handleEmailChange}/>
+                  <Input name="email" disabled={this.state.submitting} type="text" placeholder="a.v.d.stappen@example.com" id="email" className="form-control" value={this.state.email} onChange={this.handleEmailChange}/>
                 </p>
                 <p className="text-right">
                   <Button id="submitButton" disabled={this.state.submitting} outline color="dark" type="submit">
@@ -94,7 +94,7 @@ export class SignInButtons extends React.Component {
                   Sign in with {provider}
                 </a>
               </p>
-              )              
+              )
           })
         }
       </React.Fragment>

@@ -11,6 +11,7 @@ import Cookies from 'universal-cookie'
 import Package from '../package'
 import Styles from '../css/index.scss'
 
+
 export default class extends React.Component {
 
   static propTypes() {
@@ -23,7 +24,7 @@ export default class extends React.Component {
       signinBtn: React.PropTypes.boolean
     }
   }
-  
+
   constructor(props) {
     super(props)
     this.state = {
@@ -33,7 +34,7 @@ export default class extends React.Component {
     }
     this.toggleModal = this.toggleModal.bind(this)
   }
-  
+
   async toggleModal(e) {
     if (e) e.preventDefault()
 
@@ -48,65 +49,39 @@ export default class extends React.Component {
       modal: !this.state.modal
     })
   }
-  
+
   render() {
     return (
       <React.Fragment>
         <Head>
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
-          <title>{this.props.title || 'Next.js Starter Project'}</title>
+          <title>{this.props.title || 'Moneble'}</title>
           <style dangerouslySetInnerHTML={{__html: Styles}}/>
-          <script src="https://cdn.polyfill.io/v2/polyfill.min.js"/>
         </Head>
-        <Navbar light className="navbar navbar-expand-md pt-3 pb-3">
+        <Navbar light className="navbar navbar-dark justify-content-between">
           <Link prefetch href="/">
             <NavbarBrand href="/">
-              <span className="icon ion-md-home mr-1"></span> {Package.name}
+              <img src='/static/logo.png' width="30" height="30" style={{marginTop:"-0.3em"}}/> {"Moneble"}
             </NavbarBrand>
           </Link>
-          <input className="nojs-navbar-check" id="nojs-navbar-check" type="checkbox" aria-label="Menu"/>
-          <label tabIndex="1" htmlFor="nojs-navbar-check" className="nojs-navbar-label mt-2" />
-          <div className="nojs-navbar">
-            <Nav navbar>
-              <div tabIndex="1" className="dropdown nojs-dropdown">
-                <div className="nav-item">
-                  <span className="dropdown-toggle nav-link">Examples</span>
-                </div>
-                <div className="dropdown-menu">
-                  <Link prefetch href="/examples/authentication">
-                    <a href="/examples/authentication" className="dropdown-item">Auth</a>
-                  </Link>
-                  <Link prefetch href="/examples/async">
-                    <a href="/examples/async" className="dropdown-item">Async Data</a>
-                  </Link>
-                  <Link prefetch href="/examples/layout">
-                    <a href="/examples/layout" className="dropdown-item">Layout</a>
-                  </Link>
-                  <Link prefetch href="/examples/routing">
-                    <a href="/examples/routing" className="dropdown-item">Routing</a>
-                  </Link>
-                  <Link prefetch href="/examples/styling">
-                    <a href="/examples/styling" className="dropdown-item">Styling</a>
-                  </Link>
-                </div>
-              </div>
-            </Nav>
+          <Nav className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <a href="/about" className = "nav-link" style={{marginRight:"1em"}}>About</a>
+            </li>
+          </Nav>
+          <Nav>
             <UserMenu session={this.props.session} toggleModal={this.toggleModal} signinBtn={this.props.signinBtn}/>
-          </div>
+          </Nav>
         </Navbar>
         <MainBody navmenu={this.props.navmenu} fluid={this.props.fluid} container={this.props.container}>
           {this.props.children}
+          <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+          <script noModule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
         </MainBody>
-        <Container fluid={this.props.fluid}>
-          <hr className="mt-3"/>
-          <p className="text-muted small">
-            <Link href="https://github.com/iaincollins/nextjs-starter"><a className="text-muted font-weight-bold"><span className="icon ion-logo-github"/> {Package.name} {Package.version}</a></Link>
-            <span> built with </span>
-            <Link href="https://github.com/zeit/next.js"><a className="text-muted font-weight-bold">Next.js {Package.dependencies.next.replace('^', '')}</a></Link>
-            <span> &amp; </span>
-            <Link href="https://github.com/facebook/react"><a className="text-muted font-weight-bold">React {Package.dependencies.react.replace('^', '')}</a></Link>
-            .
+        <Container fluid={this.props.fluid} style={{height:'10vh', width:'100vw', maxWidth:'100vw', backgroundColor:'black',marginLeft:'0px', marginRight:'0px'}}>
+          <p className="text-muted small" style={{paddingTop: '1em', paddingBottom: '1em', color:'#ffffff'}}>
+            moneble
             <span className="ml-2">&copy; {new Date().getYear() + 1900}.</span>
           </p>
         </Container>
@@ -172,7 +147,7 @@ export class UserMenu extends React.Component {
 
    async handleSignoutSubmit(event) {
      event.preventDefault()
-     
+
      // Save current URL so user is redirected back here after signing out
      const cookies = new Cookies()
      cookies.set('redirect_url', window.location.pathname, { path: '/' })
@@ -180,14 +155,12 @@ export class UserMenu extends React.Component {
      await NextAuth.signout()
      Router.push('/')
    }
-   
+
   render() {
     if (this.props.session && this.props.session.user) {
       // If signed in display user dropdown menu
       const session = this.props.session
       return (
-        <Nav className="ml-auto" navbar>
-          {/*<!-- Uses .nojs-dropdown CSS to for a dropdown that works without client side JavaScript ->*/}
           <div tabIndex="2" className="dropdown nojs-dropdown">
             <div className="nav-item">
               <span className="dropdown-toggle nav-link d-none d-md-block">
@@ -212,7 +185,6 @@ export class UserMenu extends React.Component {
               </div>
             </div>
           </div>
-        </Nav>
       )
      } if (this.props.signinBtn === false) {
        // If not signed in, don't display sign in button if disabled
@@ -220,16 +192,14 @@ export class UserMenu extends React.Component {
     } else {
       // If not signed in, display sign in button
       return (
-        <Nav className="ml-auto" navbar>
           <NavItem>
             {/**
               * @TODO Add support for passing current URL path as redirect URL
               * so that users without JavaScript are also redirected to the page
               * they were on before they signed in.
               **/}
-            <a href="/auth?redirect=/" className="btn btn-outline-primary" onClick={this.props.toggleModal}><span className="icon ion-md-log-in mr-1"></span> Sign up / Sign in</a>
+            <a href="/auth?redirect=/" className="btn btn-outline-secondary" onClick={this.props.toggleModal}><span className="icon ion-md-log-in mr-1"></span> Sign in</a>
           </NavItem>
-        </Nav>
       )
     }
   }
@@ -254,10 +224,10 @@ export class AdminMenuItem extends React.Component {
 export class SigninModal extends React.Component {
   render() {
     if (this.props.providers === null) return null
-    
+
     return (
       <Modal isOpen={this.props.modal} toggle={this.props.toggleModal} style={{maxWidth: 700}}>
-        <ModalHeader>Sign up / Sign in</ModalHeader>
+        <ModalHeader>Sign in</ModalHeader>
         <ModalBody style={{padding: '1em 2em'}}>
           <Signin session={this.props.session} providers={this.props.providers}/>
         </ModalBody>
