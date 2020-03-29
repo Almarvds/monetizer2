@@ -8,30 +8,38 @@ export default class extends Page {
   render() {
     return (
       <Layout {...this.props} navmenu={false} container={false}>
-        <Jumbotron className="text-light rounded-0" style={{
+        <Jumbotron className="text-light rounded-0 noMargin" style={{
           backgroundColor: 'rgba(73,155,234,1)',
-          background: 'radial-gradient(ellipse at center, rgba(73,155,234,1) 0%, rgba(32,124,229,1) 100%)',
-          boxShadow: 'inset 0 0 100px rgba(0,0,0,0.1)'
+          background: 'radial-gradient(ellipse at center, #009E45 0%, #00b74f 100%)',
+          boxShadow: 'inset 0 0 100px rgba(0,0,0,0.1)',
           }}>
           <Container className="mt-2 mb-2">
             <h1 className="display-2 mb-3" style={{fontWeight: 300}}>
               <span style={{fontWeight: 600}}>
-                <span className="mr-3">▲</span>
                 <br className="v-block d-sm-none"/>
-                Next.js
+                Monetize
               </span>
-              <br className="v-block d-lg-none"/> Starter Project
+              <br className="v-block d-lg-none"/> Your videos
             </h1>
             <p className="lead mb-5">
-              A reference and template for React projects
+              A tool to help creators monetize their work
             </p>
             <p className="text-right">
-              <a href="https://github.com/iaincollins/nextjs-starter" className="btn btn-outline-light btn-lg"><span className="icon ion-logo-github mr-2"/> Download from GitHub</a>
+              <a href="/demo/monetizer"
+                className="btn btn-outline-light btn-lg" style={{marginTop:"1em", marginBottom:"2em", marginRight:"1em"}}>
+                Try the Demo
+              </a>
+              <a href="/demo/monetizer"
+                className="btn btn-outline-light btn-lg" style={{marginTop:"1em", marginBottom:"2em"}}>
+                Sign up for the Beta
+              </a>
             </p>
             <style jsx>{`
               .display-2  {
                 text-shadow: 0 5px 10px rgba(0,0,0,0.3);
                 color: rgba(255,255,255,0.9);
+                margin-top: 1.5em;
+                margin-bottom: 3em;
               }
               .lead {
                 font-size: 3em;
@@ -50,10 +58,7 @@ export default class extends Page {
           </Container>
         </Jumbotron>
         <Container>
-          <p className="text-muted small">
-            * This project is not associated with Next.js or Zeit.
-          </p>
-          <h2 className="text-center display-4 mt-5 mb-2">Features</h2>
+          <h2 className="text-center display-4 mt-5 mb-2">Use case</h2>
           <Row className="pb-5">
             <Col xs="12" sm="4" className="pt-5">
               <h3 className="text-center mb-4">Sessions / Security</h3>
@@ -86,7 +91,7 @@ export default class extends Page {
           <h2 className="text-center display-4 mt-2 mb-5">Getting Started</h2>
           <p>
             <a href="https://github.com/zeit/next.js">Next.js</a> from <a href="https://zeit.co">Zeit</a> makes creating
-            websites with React easy. 
+            websites with React easy.
           </p>
           <p>
             This project integrates several concepts to show how you can use them together in a Next.js project.

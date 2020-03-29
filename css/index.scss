@@ -6,9 +6,14 @@ $ionicons-version: "3.0.0-alpha.3" !default;
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import "../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min";
 @import "nojs-menus.scss";
+@import "monetizer.scss";
 
 .lead {
   font-size: 1.4em;
+}
+
+.noMargin{
+ margin-bottom: 0px;
 }
 
 pre {
@@ -23,11 +28,18 @@ pre {
 .navbar .btn,
 .navbar .dropdown-item,
 .navbar button {
+  color: rgba(255,255,255,0.5);
+  border-color: #ffffff;
   font-size: 18px;
 }
 
+.btn-outline-secondary:hover{
+    background-color: #ffffff !important;
+    color: #000000;
+}
+
 .navbar {
-  border-bottom: 1px solid #ddd;
+  background-color: #000000;
 }
 
 @media (max-width: 768px) {
@@ -56,7 +68,7 @@ pre {
 }
 
 /**
- * This is a fix for Reactstrap 5.0.0-alpha.4 not displaying menus in the 
+ * This is a fix for Reactstrap 5.0.0-alpha.4 not displaying menus in the
  * navbar correcrtly on mobile devices.
  **/
 .navbar .dropdown {
@@ -72,7 +84,6 @@ pre {
     border: none;
   }
 }
-
 /**
  * Fix for Reactstrap
  **/
@@ -86,4 +97,3 @@ pre {
   background: #fff;
   color: #000;
 }
-
