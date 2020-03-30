@@ -3,8 +3,8 @@ import React, {
 } from 'react'
 import Dropzone from './dropzone/Dropzone'
 import Progress from './progress/Progress'
+import {storage} from './firebase/index'
 
-var resultsLink = "";
 
 class Upload extends Component {
   constructor(props) {
@@ -40,7 +40,20 @@ class Upload extends Component {
       uploading: true
     });
     const promises = [];
+    console.log(storage);
     this.state.files.forEach(file => {
+      var uploadTask = storage.ref(`uploads/${file.name}`).put(file);
+      uploadTask.on('state_changed', (snapshot) => {
+        //progress function
+      }, (error) => {
+        console.log(error);
+      }, () => {
+        //completion function
+        console.log('completed');
+        storage.ref('uploads').child(file.name).getDownloadURL().then(url=>{
+          console.log(url);
+        })
+      });
       promises.push(this.sendRequest(file));
     });
     try {
