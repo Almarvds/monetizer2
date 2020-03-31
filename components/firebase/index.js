@@ -13,19 +13,13 @@ var firebaseConfig = {
     appId: "1:892027982570:web:9fb1f613949489ac9e3d93",
     measurementId: "G-L5BKFCKH7B"
 };
-console.log(firebase.apps.length);
-console.log(firebase.apps);
 
 if (!firebase.apps.length) {
-  console.log('firebase initialized');
-  console.log(firebaseConfig);
     firebase.initializeApp(firebaseConfig);
 }
 
-// Initialize Firebase
-console.log('setting storage');
+// Initialize Firebase storage
 var storage = firebase.storage();
-console.log(storage);
 export{
   storage, firebase as default
 }

@@ -14,12 +14,11 @@ class Upload extends Component {
       files: [],
       startedAnalyzing: false,
       uploading: false,
-      uploadProgress: {},
-      successfullUploaded: false
+      uploadProgress: 0,
+      successfullUploaded: 0
     };
     this.onFilesAdded = this.onFilesAdded.bind(this);
     this.uploadFiles = this.uploadFiles.bind(this);
-    this.sendRequest = this.sendRequest.bind(this);
     this.renderActions = this.renderActions.bind(this);
   }
 
@@ -31,130 +30,48 @@ class Upload extends Component {
   }
 
   async uploadFiles() {
-    const cleanreq = new XMLHttpRequest();
-    cleanreq.open("POST", "http://localhost:4000/cleansession");
-    cleanreq.send();
 
     this.setState({
       uploadProgress: {},
       uploading: true
     });
     const promises = [];
-    console.log(storage);
     this.state.files.forEach(file => {
       var uploadTask = storage.ref(`uploads/${file.name}`).put(file);
       uploadTask.on('state_changed', (snapshot) => {
         //progress function
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes)*100);
+        this.setState({uploadProgress: progress});
+        console.log(this.state.uploadProgress);
       }, (error) => {
         console.log(error);
       }, () => {
         //completion function
         console.log('completed');
+        this.setState({successfullUploaded: 1, uploading:false});
         storage.ref('uploads').child(file.name).getDownloadURL().then(url=>{
           console.log(url);
         })
       });
-      promises.push(this.sendRequest(file));
-    });
-    try {
-      await Promise.all(promises);
-
-      this.setState({
-        successfullUploaded: true,
-        uploading: false
-      });
-    } catch (e) {
-      // Not Production ready! Do some error handling here instead...
-      this.setState({
-        successfullUploaded: true,
-        uploading: false
-      });
-    }
-  }
-
-  sendRequest(file) {
-    return new Promise((resolve, reject) => {
-      const req = new XMLHttpRequest();
-
-      req.upload.addEventListener("progress", event => {
-        if (event.lengthComputable) {
-          const copy = {
-            ...this.state.uploadProgress
-          };
-          copy[file.name] = {
-            state: "pending",
-            percentage: (event.loaded / event.total) * 100
-          };
-          this.setState({
-            uploadProgress: copy
-          });
-        }
-      });
-
-      req.upload.addEventListener("load", event => {
-        const copy = {
-          ...this.state.uploadProgress
-        };
-        copy[file.name] = {
-          state: "done",
-          percentage: 100
-        };
-        this.setState({
-          uploadProgress: copy
-        });
-        resolve(req.response);
-      });
-
-      req.upload.addEventListener("error", event => {
-        const copy = {
-          ...this.state.uploadProgress
-        };
-        copy[file.name] = {
-          state: "error",
-          percentage: 0
-        };
-        this.setState({
-          uploadProgress: copy
-        });
-        reject(req.response);
-      });
-
-      if(fileAccepted(file)){
-        const formData = new FormData();
-        formData.append("file", file, file.name);
-        req.open("POST", "http://localhost:4000/upload");
-        req.send(formData);
-      }
-      else{
-        console.log("file was not accepted");
-        this.setState({
-          successfullUploaded: false,
-        });
-      }
-
     });
   }
 
   renderProgress(file) {
-    const uploadProgress = this.state.uploadProgress[file.name];
+    const uploadProgress = this.state.uploadProgress;
+    //this.state.uploading || this.state.successfullUploaded
     if (this.state.uploading || this.state.successfullUploaded) {
-      return ( <
-        div className = "ProgressWrapper" >
-        <
-        Progress progress = {
-          uploadProgress ? uploadProgress.percentage : 0
-        }
-        /> <
-        img className = "CheckIcon"
-        alt = "done"
-        src = "baseline-check_circle_outline-24px.svg"
-        style = {
-          {
-            opacity: uploadProgress && uploadProgress.state === "done" ? 0.5 : 0
-          }
-        }
-        /> < /
-        div >
+      return (
+        <div className='row justify-content-md-center' style={{marginTop:'1.5vh'}}>
+        <div className = 'col-md-auto' style={{width:'5vw'}}/>
+        <div className="col-md-auto progress mx-auto" style={{width:'50vw', padding:'0px'}}>
+          <div className="progress-bar-striped bg-success" role="progressbar" style={{width: `${uploadProgress}%`,
+          ariaValuenow:`${uploadProgress}`, ariaValuemin:"0", ariaValuemax:"100"}}></div>
+        </div>
+        <div className = 'col-md-auto' style={{width:'5vw'}}>
+          <img id="CheckIcon" alt = "done" src = "/static/checkmark-circle.svg"
+          style = {{ opacity:`${this.state.successfullUploaded}`, width:'2vw', height:'2vw', marginTop:'-1.5vh'}}/>
+        </div>
+        </div>
       );
     }
   }
@@ -206,6 +123,7 @@ class Upload extends Component {
       );
     }
   }
+
   render() {
       return (
         <div className = "Upload" style={{marginTop:"5vh"}}>
