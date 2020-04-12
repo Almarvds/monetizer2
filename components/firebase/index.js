@@ -4,13 +4,13 @@ var firebase = require('firebase');
 require('firebase/storage');
 
 var firebaseConfig = {
-  apiKey: "AIzaSyBcqgpvOmVLBrpQnCSPqXYk_1NHug31rN0",
+    apiKey: "AIzaSyBcqgpvOmVLBrpQnCSPqXYk_1NHug31rN0",
     authDomain: "moneble-test.firebaseapp.com",
     databaseURL: "https://moneble-test.firebaseio.com",
     projectId: "moneble-test",
     storageBucket: "moneble-test.appspot.com",
     messagingSenderId: "892027982570",
-    appId: "1:892027982570:web:9fb1f613949489ac9e3d93",
+    appId: "1:892027982570:web:9fb1f613949489ac9e3d93", 
     measurementId: "G-L5BKFCKH7B"
 };
 
