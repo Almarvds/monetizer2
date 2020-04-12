@@ -59,36 +59,6 @@ export default class extends Page {
         </Jumbotron>
         <Container>
           <h2 className="text-center display-4 mt-5 mb-2">Use case</h2>
-          <Row className="pb-5">
-            <Col xs="12" sm="4" className="pt-5">
-              <h3 className="text-center mb-4">Sessions / Security</h3>
-              <ListGroup>
-                <ListGroupItem><a className="text-dark" href="https://expressjs.com">Express</a></ListGroupItem>
-                <ListGroupItem><a className="text-dark" href="https://www.npmjs.com/package/express-sessions">Express Sessions</a></ListGroupItem>
-                <ListGroupItem><a className="text-dark" href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">CSRF Tokens</a></ListGroupItem>
-                <ListGroupItem><a className="text-dark" href="https://www.owasp.org/index.php/HttpOnly">HTTP Only Cookies</a></ListGroupItem>
-              </ListGroup>
-            </Col>
-            <Col xs="12" sm="4" className="pt-5">
-              <h3 className="text-center mb-4">Authentication</h3>
-              <ListGroup>
-                <ListGroupItem><a className="text-dark" href="http://www.passportjs.org">Passport</a></ListGroupItem>
-                <ListGroupItem><Link href="/examples/authentication"><a className="text-dark">Email Sign In</a></Link></ListGroupItem>
-                <ListGroupItem><Link href="/examples/authentication"><a className="text-dark">oAuth (Facebook, Google, Twitter…)</a></Link></ListGroupItem>
-                <ListGroupItem><a className="text-dark" href="https://www.npmjs.com/package/next-auth">NextAuth</a></ListGroupItem>
-              </ListGroup>
-            </Col>
-            <Col xs="12" sm="4" className="pt-5">
-              <h4 className="text-center mb-4">CSS / SCSS</h4>
-              <ListGroup>
-                <ListGroupItem><a className="text-dark" href="https://getbootstrap.com">Bootstrap 4.0</a></ListGroupItem>
-                <ListGroupItem><a className="text-dark" href="http://reactstrap.github.io/">Reactstrap</a></ListGroupItem>
-                <ListGroupItem><a className="text-dark" href="https://ionicframework.com/docs/ionicons/">Ionicons</a></ListGroupItem>
-                <ListGroupItem><a className="text-dark" href="http://sass-lang.com/">SASS</a></ListGroupItem>
-              </ListGroup>
-            </Col>
-          </Row>
-          <h2 className="text-center display-4 mt-2 mb-5">Getting Started</h2>
           <p>
             <a href="https://github.com/zeit/next.js">Next.js</a> from <a href="https://zeit.co">Zeit</a> makes creating
             websites with React easy.
@@ -121,6 +91,14 @@ now`}
             The next.js repository has a <a href="https://github.com/zeit/next.js/tree/master/examples">great selection of examples</a> which are an excellent reference.
           </p>
         </Container>
+        <Jumbotron className="text-light rounded-0 noMargin" style={{
+          backgroundColor: 'rgba(73,155,234,1)',
+          background: '#000000',
+          boxShadow: 'inset 0 0 100px rgba(0,0,0,0.1)',
+        }}>
+          <h2 className="text-center display-4 mt-5 mb-2">Sign up</h2>
+          
+        </Jumbotron>
       </Layout>
     )
   }

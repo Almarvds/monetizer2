@@ -3,7 +3,7 @@
 const next = require('next')
 const nextAuth = require('next-auth')
 const nextAuthConfig = require('./next-auth.config')
-
+console.log('server index');
 const routes = {
   admin:  require('./routes/admin'),
   account:  require('./routes/account')

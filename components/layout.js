@@ -80,7 +80,7 @@ export default class extends React.Component {
           <script noModule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
         </MainBody>
         <Container fluid={this.props.fluid} style={{height:'10vh', width:'100vw', maxWidth:'100vw', backgroundColor:'black',marginLeft:'0px', marginRight:'0px'}}>
-          <p className="text-muted small" style={{paddingTop: '1em', paddingBottom: '1em', color:'#ffffff'}}>
+          <p className="text-muted small" style={{paddingTop: '1em', paddingBottom: '1em', paddingLeft:'2em', color:'#ffffff'}}>
             moneble
             <span className="ml-2">&copy; {new Date().getYear() + 1900}.</span>
           </p>
@@ -226,7 +226,7 @@ export class SigninModal extends React.Component {
     if (this.props.providers === null) return null
 
     return (
-      <Modal isOpen={this.props.modal} toggle={this.props.toggleModal} style={{maxWidth: 700}}>
+      <Modal isOpen={this.props.modal} toggle={this.props.toggleModal} style={{marginTop:'20vh',maxWidth: 700}}>
         <ModalHeader>Sign in</ModalHeader>
         <ModalBody style={{padding: '1em 2em'}}>
           <Signin session={this.props.session} providers={this.props.providers}/>

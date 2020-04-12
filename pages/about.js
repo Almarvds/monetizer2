@@ -10,7 +10,7 @@ export default class extends Page {
       <Layout {...this.props} navmenu={false} container={false}>
         <Jumbotron className="text-light rounded-0 noMargin" style={{
           backgroundColor: 'rgba(73,155,234,1)',
-          background: 'radial-gradient(ellipse at center, #FFD566 0%, #FF8B23 100%)',
+          background: 'radial-gradient(ellipse at center, #0E1536 0%, #151F4F 100%)',
           boxShadow: 'inset 0 0 100px rgba(0,0,0,0.1)',
           }}>
           <Container className="mt-2 mb-2">
@@ -23,16 +23,6 @@ export default class extends Page {
             </h1>
             <p className="lead mb-5">
               Info on tool and on me
-            </p>
-            <p className="text-right">
-              <a href="https://github.com/iaincollins/nextjs-starter"
-                className="btn btn-outline-light btn-lg" style={{marginTop:"1em", marginBottom:"2em", marginRight:"1em"}}>
-                Try the Demo
-              </a>
-              <a href="https://github.com/iaincollins/nextjs-starter"
-                className="btn btn-outline-light btn-lg" style={{marginTop:"1em", marginBottom:"2em"}}>
-                Sign up for the Beta
-              </a>
             </p>
             <style jsx>{`
               .display-2  {
