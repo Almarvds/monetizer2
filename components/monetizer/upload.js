@@ -1,14 +1,15 @@
 import React, {
   Component
 } from 'react'
-import Dropzone from './dropzone/Dropzone'
-import Progress from './progress/Progress'
-import {storage} from './firebase/index'
+import Dropzone from '../dropzone/Dropzone'
+import Progress from '../progress/Progress'
+import {storage} from '../firebase/index'
 
 
 class Upload extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       response: null,
       files: [],
@@ -20,6 +21,7 @@ class Upload extends Component {
     this.onFilesAdded = this.onFilesAdded.bind(this);
     this.uploadFiles = this.uploadFiles.bind(this);
     this.renderActions = this.renderActions.bind(this);
+    this.transferURLtoBackend = this.transferURLtoBackend.bind(this);
   }
 
   onFilesAdded(files) {
@@ -27,6 +29,21 @@ class Upload extends Component {
     this.setState(prevState => ({
       files: prevState.files.concat(files)
     })))
+  }
+
+  transferURLtoBackend(url){
+    const firebaseURL = {
+      FirebaseUrl_: url
+    }
+    console.log(JSON.stringify(firebaseURL));
+    const transferURL = "http://localhost:5000/analyze";
+    fetch(transferURL,{
+      method: 'POST',
+      body:JSON.stringify(firebaseURL),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
   }
 
   async uploadFiles() {
@@ -51,6 +68,7 @@ class Upload extends Component {
         this.setState({successfullUploaded: 1, uploading:false});
         storage.ref('uploads').child(file.name).getDownloadURL().then(url=>{
           console.log(url);
+          this.transferURLtoBackend(url);
         })
       });
     });
@@ -94,7 +112,7 @@ class Upload extends Component {
             </div>
             <div className='col-mx'>
               <button className = "btn btn-success" onClick =
-              { () => console.log("analysis called") }
+              { () => {this.props.triggerPhaseShift()} }
               > Analyze </button>
             </div>
           </div >
