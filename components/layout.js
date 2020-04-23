@@ -198,7 +198,7 @@ export class UserMenu extends React.Component {
               * so that users without JavaScript are also redirected to the page
               * they were on before they signed in.
               **/}
-            <a href="/auth?redirect=/" className="btn btn-outline-secondary" onClick={this.props.toggleModal}><span className="icon ion-md-log-in mr-1"></span> Sign in</a>
+            <a href="/auth?redirect=/" className="btn btn-outline-secondary" onClick={this.props.toggleModal}>🎬 Sign in</a>
           </NavItem>
       )
     }
@@ -226,7 +226,7 @@ export class SigninModal extends React.Component {
     if (this.props.providers === null) return null
 
     return (
-      <Modal isOpen={this.props.modal} toggle={this.props.toggleModal} style={{marginTop:'20vh',maxWidth: 700}}>
+      <Modal isOpen={this.props.modal} toggle={this.props.toggleModal} style={{marginTop:'2vh',maxWidth: 700}}>
         <ModalHeader>Sign in</ModalHeader>
         <ModalBody style={{padding: '1em 2em'}}>
           <Signin session={this.props.session} providers={this.props.providers}/>

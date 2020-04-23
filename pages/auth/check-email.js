@@ -27,16 +27,20 @@ export default class extends Page {
 
   render() {
     return (
-      <div style={{backgroundColor:'#87D68C'}}>
+      <div style={{backgroundColor: 'rgba(73,155,234,1)',
+      background: 'radial-gradient(ellipse at center, #009E45 0%, #00b74f 100%)'}}>
       <Layout {...this.props} navmenu={false} signinBtn={false}>
         <div className="text-center pt-5 pb-5" style={{height:'80vh'}}>
           <div style={{height:'20vh'}}/>
-          <h1 className="display-4">Check your email</h1>
+          <h1 className="display-4" style={{marginBottom:'5vh'}}>Check your email</h1>
           <p className="lead">
-            A sign in link has been sent to { (this.props.email) ? <span className="font-weight-bold">{this.props.email}</span> : <span>your inbox</span> }.
+            { (this.props.email) ? <span className="font-weight-bold">{this.props.email}</span> : <span>your inbox</span> }.
           </p>
           <p className="lead">
-            This will allow you to set up a beta account.
+            You have been added to the beta waiting list!
+          </p>
+          <p className="lead">
+            When the time is right you will get an activated account link. 🐧
           </p>
         </div>
       </Layout>
