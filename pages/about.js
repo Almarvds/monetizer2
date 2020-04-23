@@ -22,7 +22,7 @@ export default class extends Page {
               <br className="v-block d-lg-none"/> page
             </h1>
             <p className="lead mb-5">
-              Info on tool and on me
+              Info on tool
             </p>
             <style jsx>{`
               .display-2  {
