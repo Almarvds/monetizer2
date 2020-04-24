@@ -5,7 +5,6 @@ import React, {
 import Upload from "./upload.js"
 import Analyze from "./analyze.js"
 
-
 class MonetizerCard extends Component{
   constructor(props) {
     super(props);

@@ -79,8 +79,9 @@ export default class extends React.Component {
           <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
           <script noModule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
         </MainBody>
-        <Container fluid={this.props.fluid} style={{height:'10vh', width:'100vw', maxWidth:'100vw', backgroundColor:'black',marginLeft:'0px', marginRight:'0px'}}>
-          <p className="text-muted small" style={{paddingTop: '1em', paddingBottom: '1em', paddingLeft:'2em', color:'#ffffff'}}>
+        <Container fluid={this.props.fluid} style={{height:'10vh',
+         maxWidth:'100vw', backgroundColor:'black'}}>
+          <p className="text-muted small" style={{paddingTop: '1em', maxWidth:'100vw', paddingBottom: '1em', paddingLeft:'2em', color:'#ffffff'}}>
             moneble
             <span className="ml-2">&copy; {new Date().getYear() + 1900}.</span>
           </p>
