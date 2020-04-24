@@ -12,7 +12,7 @@ export default class extends Page {
     return (
       <Layout {...this.props} navmenu={false} container={false}>
         <Jumbotron className="text-light rounded-0 noMargin" style={{
-          backgroundColor: 'rgba(73,155,234,1)',
+          backgroundColor: '#111F12',
           backgroundSize:'cover',
           boxShadow: 'inset 0 0 100px rgba(0,0,0,0.1)',
           height: "100vh",

@@ -10,7 +10,7 @@ var firebaseConfig = {
     projectId: "moneble-test",
     storageBucket: "moneble-test.appspot.com",
     messagingSenderId: "892027982570",
-    appId: "1:892027982570:web:9fb1f613949489ac9e3d93", 
+    appId: "1:892027982570:web:9fb1f613949489ac9e3d93",
     measurementId: "G-L5BKFCKH7B"
 };
 
@@ -20,6 +20,7 @@ if (!firebase.apps.length) {
 
 // Initialize Firebase storage
 var storage = firebase.storage();
+console.log(storage);
 export{
   storage, firebase as default
 }

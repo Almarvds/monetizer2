@@ -3,8 +3,11 @@ import React, {
 } from 'react'
 import Dropzone from '../dropzone/Dropzone'
 import Progress from '../progress/Progress'
-import {storage} from '../firebase/index'
 
+var firebase = require('firebase');
+var storage = '';
+// Add the Firebase products that you want to use
+require('firebase/storage');
 
 class Upload extends Component {
   constructor(props) {
@@ -16,7 +19,8 @@ class Upload extends Component {
       startedAnalyzing: false,
       uploading: false,
       uploadProgress: 0,
-      successfullUploaded: 0
+      successfullUploaded: 0,
+      initializedFirebase: false
     };
     this.onFilesAdded = this.onFilesAdded.bind(this);
     this.uploadFiles = this.uploadFiles.bind(this);
@@ -47,29 +51,37 @@ class Upload extends Component {
   }
 
   async uploadFiles() {
-
     this.setState({
       uploadProgress: {},
       uploading: true
     });
     const promises = [];
+
+    const backEndUrl = "http://localhost:5000/connect"
+    fetch(backEndUrl)
+      .then((res) => res.text())
+      .then((text) => {
+        if (!firebase.apps.length && !this.state.initializedFirebase) {
+          var firebaseConfig = JSON.parse(text);
+          firebase.initializeApp(firebaseConfig)
+          storage = firebase.storage()
+        }
+      this.setState({initializedFirebase: true})
     this.state.files.forEach(file => {
       var uploadTask = storage.ref(`uploads/${file.name}`).put(file);
       uploadTask.on('state_changed', (snapshot) => {
         //progress function
         const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes)*100);
         this.setState({uploadProgress: progress});
-        console.log(this.state.uploadProgress);
       }, (error) => {
         console.log(error);
       }, () => {
         //completion function
-        console.log('completed');
         this.setState({successfullUploaded: 1, uploading:false});
         storage.ref('uploads').child(file.name).getDownloadURL().then(url=>{
-          console.log(url);
           this.transferURLtoBackend(url);
-        })
+          })
+        });
       });
     });
   }
