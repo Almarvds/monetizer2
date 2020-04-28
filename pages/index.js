@@ -10,8 +10,11 @@ export default class extends Page {
     return (
       <Layout {...this.props} navmenu={false} container={false}>
         <Jumbotron className="text-light rounded-0 noMargin" style={{
+          borderBottom: '0.1px solid #445E47',
           backgroundColor: 'rgba(73,155,234,1)',
-          background: 'radial-gradient(ellipse at center, #009E45 0%, #00b74f 100%)',
+          background: 'url(/static/bg2_2.png)',
+          //background: 'radial-gradient(ellipse at center, #009E45 0%, #00b74f 100%)',
+          backgroundSize: 'cover',
           boxShadow: 'inset 0 0 100px rgba(0,0,0,0.1)',
           paddingBottom: '20vh'
         }}>
@@ -32,8 +35,7 @@ export default class extends Page {
                   className="btn btn-outline-light btn-lg" style={{marginTop:"3em", marginBottom:"2em", marginRight:"1em"}}>
                   Try the Demo
                 </a>
-                <a href="/demo/monetizer"
-                  className="btn btn-outline-light btn-lg" style={{marginTop:"3em", marginBottom:"2em"}}>
+                <a className="btn btn-outline-light btn-lg" style={{marginTop:"3em", marginBottom:"2em"}}>
                   Sign up for the Beta
                 </a>
               </p>
@@ -69,7 +71,9 @@ export default class extends Page {
                   <img src='/static/logo.png' style={{height: '40vh',width:'40vh', marginBottom:'5vh'}}/>
                   <h5><span><img src='/static/numbers-01.png' style={{height: '5vh',width:'5vh', marginRight:'0.8vw'}}/>
                   </span>Upload your video to Moneble</h5>
-                  <p>Here comes the text underneath. There is a bunch of text there, like a ton. Describing the service process.</p>                  </Col>
+                  <p>Before uploading to your platform of choice, make an account on
+                  Moneble and upload the video file you're planning to publish. </p>
+                  </Col>
                 </Fade>
               </Col>
               <Col>
@@ -78,8 +82,8 @@ export default class extends Page {
                     <img src='/static/flags.svg' style={{marginTop:'-10vh',height: '40vh',width:'40vh', marginBottom:'5vh'}}/>
                     <h5><span><img src='/static/numbers-02.png' style={{height: '5vh',width:'5vh', marginRight:'0.8vw'}}/>
                     </span>Check for potential flags</h5>
-                    <p>Moneble checks your content for potential flags, meaning
-                    it will highlight anything that could cause it to be deemed as advertiser unfriendly.</p>
+                    <p>Moneble checks your content for potential flags, meaning it will
+                    highlight anything that could cause it to be flagged or deemed as advertiser unfriendly.</p>
                   </Col>
                 </Fade>
               </Col>
@@ -89,8 +93,8 @@ export default class extends Page {
                     <img src='/static/YouTube_monetization.png' style={{height: '40vh',width:'40vh', marginBottom:'5vh'}}/>
                     <h5><span><img src='/static/numbers-03.png' style={{height: '5vh',width:'5vh', marginRight:'0.8vw'}}/>
                     </span>Guarantee your paycheck</h5>
-                    <p>Secure your income by making changes based on your results, or use them to challenge the decision making from the platform.
-                       </p>
+                    <p>Secure your income by making changes based on your results,
+                    or use them to challenge the decision making of the platform.</p>
                     <div style={{height:'50vh'}}/>
                   </Col>
                 </Fade>
@@ -101,7 +105,7 @@ export default class extends Page {
           backgroundColor: 'rgba(73,155,234,1)',
           background: '#000000',
           boxShadow: 'inset 0 0 100px rgba(0,0,0,0.1)',
-        }}>
+        }}  ref={(el) => { this.messagesEnd = el; }}>
           <h2 className="text-center display-4 mt-5 mb-2">Sign up</h2>
         </Jumbotron>
       </Layout>
