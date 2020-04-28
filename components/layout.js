@@ -67,7 +67,7 @@ export default class extends React.Component {
           </Link>
           <Nav className="navbar-nav ml-auto">
             <li className="nav-item">
-              <a href="/about" className = "nav-link" style={{marginRight:"1em"}}>About</a>
+              <a href="/about" className = "nav-link" id = "nav-link" style={{marginRight:"1em"}}>About</a>
             </li>
           </Nav>
           <Nav>
@@ -79,8 +79,7 @@ export default class extends React.Component {
           <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
           <script noModule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
         </MainBody>
-        <Container fluid={this.props.fluid} style={{height:'10vh',
-         maxWidth:'100vw', backgroundColor:'black'}}>
+        <Container className = 'Footer' fluid={this.props.fluid}>
           <p className="text-muted small" style={{paddingTop: '1em', maxWidth:'100vw', paddingBottom: '1em', paddingLeft:'2em', color:'#ffffff'}}>
             moneble
             <span className="ml-2">&copy; {new Date().getYear() + 1900}.</span>
@@ -199,7 +198,7 @@ export class UserMenu extends React.Component {
               * so that users without JavaScript are also redirected to the page
               * they were on before they signed in.
               **/}
-            <a href="/auth?redirect=/" className="btn btn-outline-secondary" onClick={this.props.toggleModal}>🎬 Sign in</a>
+            <a href="/auth?redirect=/" className="btn btn-outline-secondary" onClick={this.props.toggleModal}>🎬  Sign in</a>
           </NavItem>
       )
     }

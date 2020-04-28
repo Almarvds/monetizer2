@@ -95,8 +95,9 @@ class MonetizerCard extends Component{
   render() {
       return (
         <div className="card text-center mx-auto" style = {{width:"70vw", height:"40vw", borderRadius: "10px",
-          background: "#ffffff",
-          boxShadow:  "11px 11px 19px rgba(0,0,0,0.2), -11px -11px 19px rgba(255,255,255,0.1)"}}>
+          background: "#ffffff"
+          //boxShadow:  "11px 11px 19px rgba(0,0,0,0.2), -11px -11px 19px rgba(255,255,255,0.1)"
+          }}>
           <div> {this.state.renderPhase} </div>
         </div>
       )
