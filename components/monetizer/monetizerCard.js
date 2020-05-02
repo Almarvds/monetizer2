@@ -4,12 +4,13 @@ import React, {
 
 import Upload from "./upload.js"
 import Analyze from "./analyze.js"
+import BetaAccess from "./betaAccess.js"
 
 class MonetizerCard extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      renderPhase: this.renderUpload()
+      renderPhase: this.renderLogin()
     };
     this.setAnalyzePhase = this.setAnalyzePhase.bind(this);
   }
@@ -32,6 +33,23 @@ class MonetizerCard extends Component{
       .then((text) => {
         console.log(text);
       });
+  }
+
+  renderLogin(){
+    return(
+      <div>
+        <div className="card-header">
+          <ul className="nav nav-tabs card-header-tabs">
+            <li className="nav-item">
+              <a className="nav-link active" href="#">Login</a>
+            </li>
+          </ul>
+        </div>
+        <div className="card-body">
+          <BetaAccess triggerPhaseShift={this.setUploadPhase}/>
+        </div>
+      </div>
+    )
   }
 
   renderUpload(){

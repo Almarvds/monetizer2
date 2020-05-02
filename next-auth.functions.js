@@ -38,9 +38,17 @@
  * specific configuration from your code.
  **/
 
+
+
 // Load environment variables from a .env file if one exists
 require('dotenv').load()
 
+MONGO_URI='mongodb://localhost:27017/my-database'
+EMAIL_FROM='almarvanderstappen@gmail.com'
+EMAIL_SERVER='smtp.gmail.com'
+EMAIL_PORT='465'
+EMAIL_USERNAME='almarvanderstappen@gmail.com'
+EMAIL_PASSWORD='4975madsie'
 // This config file uses MongoDB for User accounts, as well as session storage.
 // This config includes options for NeDB, which it defaults to if no DB URI
 // is specified. NeDB is an in-memory only database intended here for testing.
@@ -52,7 +60,25 @@ const MongoObjectId = (process.env.MONGO_URI) ? require('mongodb').ObjectId : (i
 const nodemailer = require('nodemailer')
 const nodemailerSmtpTransport = require('nodemailer-smtp-transport')
 const nodemailerDirectTransport = require('nodemailer-direct-transport')
+var transporter = ''
+main()
 
+async function main() {
+  // Generate test SMTP service account from ethereal.email
+  // Only needed if you don't have a real mail account for testing
+  let testAccount = await nodemailer.createTestAccount();
+
+  // create reusable transporter object using the default SMTP transport
+  transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: testAccount.user, // generated ethereal user
+      pass: testAccount.pass // generated ethereal password
+    }
+  });
+}
 // Send email direct from localhost if no mail server configured
 let nodemailerTransport = nodemailerDirectTransport()
 if (process.env.EMAIL_SERVER && process.env.EMAIL_USERNAME && process.env.EMAIL_PASSWORD) {
@@ -63,6 +89,17 @@ if (process.env.EMAIL_SERVER && process.env.EMAIL_USERNAME && process.env.EMAIL_
       auth: {
         user: process.env.EMAIL_USERNAME,
         pass: process.env.EMAIL_PASSWORD
+      }
+    })
+} else {
+  console.log('not found')
+  nodemailerTransport = nodemailerSmtpTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: 'almarvanderstappen@gmail.com',
+        pass: '4975madsie'
       }
     })
 }
@@ -198,14 +235,14 @@ module.exports = () => {
       // Define method for sending links for signing in over email.
       sendSignInEmail: ({
         email = null,
-        url = null
+        url = null,
         } = {}) => {
         nodemailer
         .createTransport(nodemailerTransport)
         .sendMail({
           to: email,
           from: process.env.EMAIL_FROM,
-          subject: 'Sign in link',
+          subject: 'Beta access',
           text: `Use the link below to sign in:\n\n${url}\n\n`,
           html: `<p>Use the link below to sign in:</p><p>${url}</p>`
         }, (err) => {
@@ -214,6 +251,9 @@ module.exports = () => {
           }
         })
         if (process.env.NODE_ENV === 'development')  {
+          console.log(process.env.EMAIL_FROM)
+          console.log('generating email')
+          console.log(process.env.NODE_ENV)
           console.log('Generated sign in link ' + url + ' for ' + email)
         }
       },

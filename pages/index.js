@@ -1,21 +1,67 @@
 import Link from 'next/link'
 import React from 'react'
-import { Container, Row, Col, Button, Jumbotron, ListGroup, ListGroupItem } from 'reactstrap'
+import { Container, Row, Col, Button, Jumbotron, ListGroup, ListGroupItem, Form, Input, Label } from 'reactstrap'
 import Page from '../components/page'
 import Layout from '../components/layout'
 import Fade from 'react-reveal/Fade';
+import Cookies from 'universal-cookie'
+import { NextAuth } from 'next-auth/client'
+import Router from 'next/router'
+var Scroll = require('react-scroll');
+var Element = Scroll.Element;
+var scroller = Scroll.scroller;
 
 export default class extends Page {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      email: '',
+      session: this.props.session,
+      providers: this.props.providers,
+      submitting: false
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleEmailChange = this.handleEmailChange.bind(this)
+  }
+
+  handleEmailChange(event) {
+    this.setState({
+      email: event.target.value.trim()
+    })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+
+    if (!this.state.email) return
+
+    this.setState({
+      submitting: true
+    })
+
+    // Save current URL so user is redirected back here after signing in
+    const cookies = new Cookies()
+    cookies.set('redirect_url', window.location.pathname, { path: '/' })
+
+    NextAuth.signin(this.state.email)
+    .then(() => {
+      Router.push(`/auth/check-email?email=${this.state.email}`)
+    })
+    .catch(err => {
+      Router.push(`/auth/error?action=signin&type=email&email=${this.state.email}`)
+    })
+  }
+
   render() {
     return (
       <Layout {...this.props} navmenu={false} container={false}>
         <Jumbotron className="text-light rounded-0 noMargin" style={{
-          borderBottom: '0.1px solid #445E47',
           backgroundColor: 'rgba(73,155,234,1)',
           background: 'url(/static/bg2_2.png)',
           //background: 'radial-gradient(ellipse at center, #009E45 0%, #00b74f 100%)',
           backgroundSize: 'cover',
-          boxShadow: 'inset 0 0 100px rgba(0,0,0,0.1)',
+          boxShadow: 'inset 0px -119px 77px -10px rgba(25,33,25,1)',
           paddingBottom: '20vh'
         }}>
           <Fade top duration={2000} distance={'8vh'}>
@@ -31,12 +77,13 @@ export default class extends Page {
                 A tool to help creators monetize their work
               </p>
               <p className="text-right">
-                <a href="/demo/monetizer"
+                <a href= '/demo/monetizer' id= 'demoButton'
                   className="btn btn-outline-light btn-lg" style={{marginTop:"3em", marginBottom:"2em", marginRight:"1em"}}>
-                  Try the Demo
+                  Try the Demo!
                 </a>
-                <a className="btn btn-outline-light btn-lg" style={{marginTop:"3em", marginBottom:"2em"}}>
-                  Sign up for the Beta
+                <a className="btn btn-outline-light btn-lg" id = "LandButton" style={{marginTop:"3em", marginBottom:"2em"}}
+                onClick={scrollDown}>
+                Sign up for the Beta
                 </a>
               </p>
               <style jsx>{`
@@ -63,52 +110,77 @@ export default class extends Page {
             </Container>
           </Fade>
         </Jumbotron>
-          <Container className = 'whiteOnBlack' style= {{paddingTop:'35vh'}}>
-            <Row>
-              <Col>
-                <Fade left duration={2000} distance={'8vh'}>
-                  <Col>
-                  <img src='/static/logo.png' style={{height: '40vh',width:'40vh', marginBottom:'5vh'}}/>
-                  <h5><span><img src='/static/numbers-01.png' style={{height: '5vh',width:'5vh', marginRight:'0.8vw'}}/>
-                  </span>Upload your video to Moneble</h5>
-                  <p>Before uploading to your platform of choice, make an account on
-                  Moneble and upload the video file you're planning to publish. </p>
-                  </Col>
-                </Fade>
-              </Col>
-              <Col>
-                <Fade top duration={2000} distance={'8vh'} delay={2000}>
-                  <Col>
-                    <img src='/static/flags.svg' style={{marginTop:'-10vh',height: '40vh',width:'40vh', marginBottom:'5vh'}}/>
-                    <h5><span><img src='/static/numbers-02.png' style={{height: '5vh',width:'5vh', marginRight:'0.8vw'}}/>
-                    </span>Check for potential flags</h5>
-                    <p>Moneble checks your content for potential flags, meaning it will
-                    highlight anything that could cause it to be flagged or deemed as advertiser unfriendly.</p>
-                  </Col>
-                </Fade>
-              </Col>
-              <Col>
-                <Fade right duration={2000} distance={'15vh'} delay={4000}>
-                  <Col>
-                    <img src='/static/YouTube_monetization.png' style={{height: '40vh',width:'40vh', marginBottom:'5vh'}}/>
-                    <h5><span><img src='/static/numbers-03.png' style={{height: '5vh',width:'5vh', marginRight:'0.8vw'}}/>
-                    </span>Guarantee your paycheck</h5>
-                    <p>Secure your income by making changes based on your results,
-                    or use them to challenge the decision making of the platform.</p>
-                    <div style={{height:'50vh'}}/>
-                  </Col>
-                </Fade>
-              </Col>
-            </Row>
+        <Container className = '.container-fluid whiteOnBlack' style= {{paddingTop:'35vh'}}>
+          <Row>
+            <Col>
+              <Fade left duration={2000} distance={'8vh'}>
+                <Col>
+                <img src='/static/logo.png' style={{height: '40vh',width:'40vh', marginBottom:'5vh'}}/>
+                <h5><span><img src='/static/numbers-01.png' style={{height: '5vh',width:'5vh', marginRight:'0.8vw'}}/>
+                </span>Upload your video to Moneble</h5>
+                <p>Before uploading to your platform of choice, make an account on
+                Moneble and upload the video file you're planning to publish. </p>
+                </Col>
+              </Fade>
+            </Col>
+            <Col>
+              <Fade top duration={2000} distance={'8vh'} delay={1500}>
+                <Col>
+                  <img src='/static/flags.svg' style={{marginTop:'-10vh',height: '40vh',width:'40vh', marginBottom:'5vh'}}/>
+                  <h5><span><img src='/static/numbers-02.png' style={{height: '5vh',width:'5vh', marginRight:'0.8vw'}}/>
+                  </span>Check for potential flags</h5>
+                  <p>Moneble checks your content for potential flags, meaning it will
+                  highlight anything that could cause it to be flagged or deemed as advertiser unfriendly.</p>
+                </Col>
+              </Fade>
+            </Col>
+            <Col>
+              <Fade right duration={2000} distance={'8vh'} delay={3000}>
+                <Col>
+                  <img src='/static/YouTube_monetization.png' style={{height: '40vh',width:'40vh', marginBottom:'5vh'}}/>
+                  <h5><span><img src='/static/numbers-03.png' style={{height: '5vh',width:'5vh', marginRight:'0.8vw'}}/>
+                  </span>Guarantee your paycheck</h5>
+                  <p>Secure your income by making changes based on your results,
+                  or use them to challenge the decision making of the platform.</p>
+                  <div style={{height:'50vh'}}/>
+                </Col>
+              </Fade>
+            </Col>
+          </Row>
+        </Container>
+        <Element name="myScrollToElement"></Element>
+        <Fade top duration={2000} distance={'8vh'}>
+          <Container  className = '.container-fluid whiteOnBlack' id='subForm' style= {{marginTop:'35vh'}}>
+            <div>
+                <h2 className="text-center" style = {{paddingBottom: '5vh', color: '#57B751'}}> Sign up for our release or participate in the beta! </h2>
+              <Form style={{width:'50%',
+    margin:'0 auto'}}id="signin" method="post" action="/auth/email/signin" onSubmit={this.handleSubmit}>
+                <p className="text-center">
+                  <Label htmlFor="email">Enter your Email address</Label><br/>
+                  <Input name="email" style={{width:'40vw',marginLeft:'2vw'}} disabled={this.state.submitting} type="text" placeholder="i.love.moneble@example.com" id="email" className="form-control" value={this.state.email} onChange={this.handleEmailChange}/>
+                </p>
+                <p className="text-center">
+                  <Button id="submitButton" disabled={this.state.submitting} outline color="light" type="submit">
+                    {this.state.submitting === true && <span className="icon icon-spin ion-md-refresh mr-2"/>}
+                    Sign me up!
+                  </Button>
+                </p>
+              </Form>
+            </div>
           </Container>
-        <Jumbotron className="text-light rounded-0 noMargin" style={{
-          backgroundColor: 'rgba(73,155,234,1)',
-          background: '#000000',
-          boxShadow: 'inset 0 0 100px rgba(0,0,0,0.1)',
-        }}  ref={(el) => { this.messagesEnd = el; }}>
-          <h2 className="text-center display-4 mt-5 mb-2">Sign up</h2>
-        </Jumbotron>
+        </Fade>
+        <Container style= {{paddingTop:'35vh', height:'30vh'}}>
+        </Container>
       </Layout>
     )
   }
+}
+
+function scrollDown(){
+  scroller.scrollTo('myScrollToElement', {
+    duration: 1500,
+    delay: 100,
+    smooth: 'easeOutQuart',
+    offset: 50, // Scrolls to element + 50 pixels down the page
+  })
 }
