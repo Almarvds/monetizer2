@@ -67,7 +67,7 @@ export default class extends React.Component {
           </Link>
           <Nav className="navbar-nav ml-auto">
             <li className="nav-item">
-              <a href="/about" className = "nav-link" id = "nav-link" style={{marginRight:"1em"}}>About</a>
+              <a className = "nav-link" id = "nav-link" style={{marginRight:"1em"}}>About</a>
             </li>
           </Nav>
           <Nav>
@@ -161,7 +161,7 @@ export class UserMenu extends React.Component {
       // If signed in display user dropdown menu
       const session = this.props.session
       return (
-          <div tabIndex="2" className="dropdown nojs-dropdown">
+          <div tabIndex="2" className="dropdown nojs-dropdown" style={{color:'black'}}>
             <div className="nav-item">
               <span className="dropdown-toggle nav-link d-none d-md-block">
                 <span className="icon ion-md-contact" style={{fontSize: '2em', position: 'absolute', top: -5, left: -25}}></span>

@@ -92,6 +92,17 @@ background-color: #192119;
   display: block;
 }
 
+#LandButton:hover {
+  color: #000000;
+}
+
+#subForm{
+  padding-top: 5vh;
+  box-shadow: 0 0.5rem 3rem -0.9rem #000;
+  padding-bottom: 5vh;
+  border-radius: 5px;
+}
+
 #nav-link {
   color: rgba(255,255,255,0.8);
 }
