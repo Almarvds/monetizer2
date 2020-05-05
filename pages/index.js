@@ -56,6 +56,7 @@ export default class extends Page {
   render() {
     return (
       <Layout {...this.props} navmenu={false} container={false}>
+        <link rel="shortcut icon" href="/static/favicon.ico" />
         <Jumbotron className="text-light rounded-0 noMargin" style={{
           backgroundColor: 'rgba(73,155,234,1)',
           background: 'url(/static/bg2_2.png)',
@@ -150,14 +151,14 @@ export default class extends Page {
         </Container>
         <Element name="myScrollToElement"></Element>
         <Fade top duration={2000} distance={'8vh'}>
-          <Container  className = '.container-fluid whiteOnBlack' id='subForm' style= {{marginTop:'35vh'}}>
+          <Container  className = '.container-fluid whiteOnBlack' id='subForm' style= {{marginTop:'25vh'}}>
             <div>
                 <h2 className="text-center" style = {{paddingBottom: '5vh', color: '#57B751'}}> Sign up for our release or participate in the beta! </h2>
               <Form style={{width:'50%',
     margin:'0 auto'}}id="signin" method="post" action="/auth/email/signin" onSubmit={this.handleSubmit}>
                 <p className="text-center">
                   <Label htmlFor="email">Enter your Email address</Label><br/>
-                  <Input name="email" style={{width:'30vw',marginLeft:'3vw'}} disabled={this.state.submitting} type="text" placeholder="i.love.moneble@example.com" id="email" className="form-control" value={this.state.email} onChange={this.handleEmailChange}/>
+                  <Input name="email" style={{width:'30vw',marginLeft:'7vw'}} disabled={this.state.submitting} type="text" placeholder="i.love.moneble@example.com" id="email" className="form-control" value={this.state.email} onChange={this.handleEmailChange}/>
                 </p>
                 <p className="text-center">
                   <Button id="submitButton" disabled={this.state.submitting} outline color="light" type="submit">

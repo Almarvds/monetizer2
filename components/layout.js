@@ -10,6 +10,7 @@ import { NextAuth } from 'next-auth/client'
 import Cookies from 'universal-cookie'
 import Package from '../package'
 import Styles from '../css/index.scss'
+//<a className = "nav-link" id = "nav-link" style={{marginRight:"1em"}}>About</a>
 
 
 export default class extends React.Component {
@@ -56,6 +57,7 @@ export default class extends React.Component {
         <Head>
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
+          <link rel="shortcut icon" href="/static/favicon.ico" />
           <title>{this.props.title || 'Moneble'}</title>
           <style dangerouslySetInnerHTML={{__html: Styles}}/>
         </Head>
@@ -67,7 +69,6 @@ export default class extends React.Component {
           </Link>
           <Nav className="navbar-nav ml-auto">
             <li className="nav-item">
-              <a className = "nav-link" id = "nav-link" style={{marginRight:"1em"}}>About</a>
             </li>
           </Nav>
           <Nav>
@@ -80,7 +81,7 @@ export default class extends React.Component {
           <script noModule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
         </MainBody>
         <Container className = 'Footer' fluid={this.props.fluid}>
-          <p className="text-muted small" style={{paddingTop: '1em', maxWidth:'100vw', paddingLeft:'2em'}}>
+          <p className="text-muted small" style={{paddingTop: '2em', maxWidth:'100vw', paddingLeft:'2em'}}>
             <a style={{color:'#ffffff', fontSize:'15px'}} href="mailto:info@moneble.co">📧 info@moneble.co</a>
           </p>
           <p className="text-muted small" style={{maxWidth:'100vw', paddingBottom: '1em', paddingLeft:'2em'}}>

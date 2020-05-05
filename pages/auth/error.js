@@ -18,8 +18,8 @@ export default class extends Page {
       return(
         <Layout {...this.props} navmenu={false}>
           <div className="text-center mb-5">
-            <h1 className="display-4 mt-5 mb-3">Unable to sign in</h1>
-            <p className="lead">An account associated with your email address already exists.</p>
+            <h1 className="display-4 mt-5 mb-3 whiteOnBlack">Unable to sign in</h1>
+            <p className="lead whiteOnBlack">An account associated with your email address already exists.</p>
             <p className="lead"><Link href="/auth"><a>Sign in with email or another service</a></Link></p>
           </div>
           <div className="row">
@@ -27,7 +27,7 @@ export default class extends Page {
               <div className="text-muted">
                 <h4 className="mb-2">Why am I seeing this?</h4>
                 <p className="mb-2">
-                  It looks like you might have already signed up using another service. 
+                  It looks like you might have already signed up using another service.
                 </p>
                 <p className="mb-3">
                   To protect your account, if you have perviously signed up
@@ -57,8 +57,8 @@ export default class extends Page {
       return(
         <Layout {...this.props} navmenu={false}>
           <div className="text-center mb-5">
-            <h1 className="display-4 mt-5">Error signing in</h1>
-            <p className="lead">An error occured while trying to sign in.</p>
+            <h1 className="display-4 mt-5 whiteOnBlack">Error signing in</h1>
+            <p className="lead whiteOnBlack">An error occured while trying to sign in.</p>
             <p className="lead"><Link href="/auth"><a>Sign in with email or another service</a></Link></p>
           </div>
         </Layout>
