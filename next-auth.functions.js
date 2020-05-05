@@ -42,44 +42,19 @@
 
 // Load environment variables from a .env file if one exists
 require('dotenv').load()
-
-MONGO_URI='mongodb://localhost:27017/my-database'
-EMAIL_FROM='almarvanderstappen@gmail.com'
-EMAIL_SERVER='smtp.gmail.com'
-EMAIL_PORT='465'
-EMAIL_USERNAME='almarvanderstappen@gmail.com'
-EMAIL_PASSWORD='4975madsie'
 // This config file uses MongoDB for User accounts, as well as session storage.
 // This config includes options for NeDB, which it defaults to if no DB URI
 // is specified. NeDB is an in-memory only database intended here for testing.
 const MongoClient = require('mongodb').MongoClient
 const NeDB = require('nedb')
-const MongoObjectId = (process.env.MONGO_URI) ? require('mongodb').ObjectId : (id) => { return id }
+//const MongoObjectId = (process.env.MONGO_URI) ? require('mongodb').ObjectId : (id) => { return id }
 
 // Use Node Mailer for email sign in
 const nodemailer = require('nodemailer')
 const nodemailerSmtpTransport = require('nodemailer-smtp-transport')
 const nodemailerDirectTransport = require('nodemailer-direct-transport')
-var transporter = ''
-main()
-
-async function main() {
-  // Generate test SMTP service account from ethereal.email
-  // Only needed if you don't have a real mail account for testing
-  let testAccount = await nodemailer.createTestAccount();
-
-  // create reusable transporter object using the default SMTP transport
-  transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: testAccount.user, // generated ethereal user
-      pass: testAccount.pass // generated ethereal password
-    }
-  });
-}
 // Send email direct from localhost if no mail server configured
+
 let nodemailerTransport = nodemailerDirectTransport()
 if (process.env.EMAIL_SERVER && process.env.EMAIL_USERNAME && process.env.EMAIL_PASSWORD) {
   nodemailerTransport = nodemailerSmtpTransport({
@@ -91,22 +66,12 @@ if (process.env.EMAIL_SERVER && process.env.EMAIL_USERNAME && process.env.EMAIL_
         pass: process.env.EMAIL_PASSWORD
       }
     })
-} else {
-  console.log('not found')
-  nodemailerTransport = nodemailerSmtpTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      auth: {
-        user: 'almarvanderstappen@gmail.com',
-        pass: '4975madsie'
-      }
-    })
 }
 
 module.exports = () => {
   return new Promise((resolve, reject) => {
-    if (process.env.MONGO_URI) {
+    //if(process.env.MONGO_URI)
+    if (false) {
       console.log('connected to mongo database')
       // Connect to MongoDB Database and return user connection
       MongoClient.connect(process.env.MONGO_URI, (err, mongoClient) => {
@@ -243,8 +208,10 @@ module.exports = () => {
           to: email,
           from: process.env.EMAIL_FROM,
           subject: 'Beta access',
-          text: `Use the link below to sign in:\n\n${url}\n\n`,
-          html: `<p>Use the link below to sign in:</p><p>${url}</p>`
+          text: `Your email has been added to the beta access list`,
+          html: `<p>You are now on the list for a beta key.</p><p> Since there are more
+          customers for beta testing than expected, you will receive another email when your key is ready.</p>
+          <p>See you soon!</p>`
         }, (err) => {
           if (err) {
             console.error('Error sending email to ' + email, err)

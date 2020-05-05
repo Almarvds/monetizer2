@@ -157,7 +157,7 @@ export default class extends Page {
     margin:'0 auto'}}id="signin" method="post" action="/auth/email/signin" onSubmit={this.handleSubmit}>
                 <p className="text-center">
                   <Label htmlFor="email">Enter your Email address</Label><br/>
-                  <Input name="email" style={{width:'40vw',marginLeft:'2vw'}} disabled={this.state.submitting} type="text" placeholder="i.love.moneble@example.com" id="email" className="form-control" value={this.state.email} onChange={this.handleEmailChange}/>
+                  <Input name="email" style={{width:'30vw',marginLeft:'3vw'}} disabled={this.state.submitting} type="text" placeholder="i.love.moneble@example.com" id="email" className="form-control" value={this.state.email} onChange={this.handleEmailChange}/>
                 </p>
                 <p className="text-center">
                   <Button id="submitButton" disabled={this.state.submitting} outline color="light" type="submit">

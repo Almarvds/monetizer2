@@ -80,7 +80,10 @@ export default class extends React.Component {
           <script noModule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
         </MainBody>
         <Container className = 'Footer' fluid={this.props.fluid}>
-          <p className="text-muted small" style={{paddingTop: '1em', maxWidth:'100vw', paddingBottom: '1em', paddingLeft:'2em', color:'#ffffff'}}>
+          <p className="text-muted small" style={{paddingTop: '1em', maxWidth:'100vw', paddingLeft:'2em'}}>
+            <a style={{color:'#ffffff', fontSize:'15px'}} href="mailto:info@moneble.co">📧 info@moneble.co</a>
+          </p>
+          <p className="text-muted small" style={{maxWidth:'100vw', paddingBottom: '1em', paddingLeft:'2em'}}>
             moneble
             <span className="ml-2">&copy; {new Date().getYear() + 1900}.</span>
           </p>
