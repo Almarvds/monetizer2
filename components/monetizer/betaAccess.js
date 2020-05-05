@@ -24,7 +24,7 @@ class BetaAccess extends Component {
   }
 
   async handleSubmit(event){
-    this.props.triggerPhaseShift();  
+    this.props.triggerPhaseShift();
   }
 
   render() {
@@ -34,7 +34,7 @@ class BetaAccess extends Component {
           <div className = "mx-auto" style={{color:'black'}}>
             <h3> Beta sign in </h3>
             <p> You need a Beta key to access the demo. </p>
-            <Form id="betaKey" method="post" onSubmit={this.handleSubmit} style={{marginTop:'6vh'}}>
+            <Form id="betaKey" method="post" onSubmit={this.handleSubmit} style={{marginTop:'10vh'}}>
               <p>
                 <Label htmlFor="key">Key:</Label><br/>
                 <Input name="key" disabled={this.state.submitting} type="password" maxLength='6'
@@ -50,7 +50,6 @@ class BetaAccess extends Component {
               </p>
             </Form>
           </div>
-          <div style={{height:'10vh'}}/>
         </div>
       );
   }

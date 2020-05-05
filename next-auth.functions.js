@@ -209,9 +209,18 @@ module.exports = () => {
           from: process.env.EMAIL_FROM,
           subject: 'Beta access',
           text: `Your email has been added to the beta access list`,
-          html: `<p>You are now on the list for a beta key.</p><p> Since there are more
+          attachments: [{
+              filename: 'logo.png',
+              path: __dirname+'/static/logo.png',
+              cid: 'cid_unique' //same cid value as in the html img src
+          }],
+          html: `<h4>Hey Beta tester!</h4>
+          <p>You are now on the list for a beta key. Since there are more
           customers for beta testing than expected, you will receive another email when your key is ready.</p>
-          <p>See you soon!</p>`
+          <p>Stay awesome!</p>
+          <p> </p>
+          <h3><span><img src='cid:cid_unique' width="15" height="15"/></span>  Team Moneble</h3>
+          `
         }, (err) => {
           if (err) {
             console.error('Error sending email to ' + email, err)

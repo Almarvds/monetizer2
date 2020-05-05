@@ -10,12 +10,12 @@ import Layout from '../../components/layout'
 import SignIn from '../../components/signin'
 
 export default class extends Page {
-  
+
   static async getInitialProps({req, res, query}) {
     let props = await super.getInitialProps({req})
     props.session = await NextAuth.init({force: true, req: req})
     props.providers = await NextAuth.providers({req})
-    
+
     // If signed in already, redirect to account management page.
     if (props.session.user) {
       if (req) {
@@ -30,10 +30,10 @@ export default class extends Page {
       const cookies = new Cookies((req && req.headers.cookie) ? req.headers.cookie : null)
       cookies.set('redirect_url', query.redirect, { path: '/' })
     }
-    
+
     return props
   }
-  
+
   render() {
     if (this.props.session.user) {
       return (
@@ -46,9 +46,9 @@ export default class extends Page {
     } else {
       return (
         <Layout {...this.props} navmenu={false} signinBtn={false}>
-          <h1 className="text-center display-4 mt-5">Sign up / Sign in</h1>
+          <h1 className="text-center display-4 mt-5 whiteOnBlack">Sign up / Sign in</h1>
           <Row className="mb-5">
-            <Col lg="8" className="mr-auto ml-auto" style={{marginBottom: 20}}>
+            <Col lg="8" className="mr-auto ml-auto whiteOnBlack" style={{marginBottom: 20}}>
               <SignIn session={this.props.session} providers={this.props.providers}/>
             </Col>
           </Row>
