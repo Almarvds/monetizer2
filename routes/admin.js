@@ -11,7 +11,8 @@
 const MongoClient = require('mongodb').MongoClient
 
 let usersCollection
-if (process.env.MONGO_URI) { 
+//if(process.env.mongo_uri)
+if (false) { 
   // Connect to MongoDB Database and return user connection
   MongoClient.connect(process.env.MONGO_URI, (err, mongoClient) => {
     if (err) throw new Error(err)
@@ -31,19 +32,19 @@ module.exports = (expressApp) => {
     // Check user is logged in and has admin access
     if (!req.user || !req.user.admin || req.user.admin !== true)
       return res.status('403').end()
-      
+
     const page = (req.query.page && parseInt(req.query.page) > 0) ? parseInt(req.query.page) : 1
     const sort = (req.query.sort) ? { [req.query.sort]: 1 } : {}
-    
+
     let size = 10
-    if (req.query.size 
+    if (req.query.size
         && parseInt(req.query.size) > 0
         && parseInt(req.query.size) < 500) {
       size = parseInt(req.query.size)
     }
 
     const skip = (size*(page-1) > 0) ? size*(page-1) : 0
-    
+
     let response = {
       users: [],
       page: page,
@@ -51,7 +52,7 @@ module.exports = (expressApp) => {
       sort: req.params.sort,
       total: 0
     }
-    
+
     if (req.params.sort) response.sort = req.params.sort
 
     let result
@@ -61,7 +62,7 @@ module.exports = (expressApp) => {
       .skip(skip)
       .sort(sort)
       .limit(size)
-      
+
       result.toArray((err, users) => {
         if (err) {
           reject(err)
@@ -81,7 +82,7 @@ module.exports = (expressApp) => {
     .catch(err => {
       return res.status(500).json(err)
     })
-    
+
   })
 
 }
