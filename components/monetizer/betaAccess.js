@@ -43,7 +43,9 @@ class BetaAccess extends Component {
               </p>
               <p className="text-center">
                 <Button id="keySubmitButton" disabled={this.state.submitting} outline color="dark"
-                onClick= { () => {this.props.triggerPhaseShift()} }>
+                onClick= { () => {
+                  //this.props.triggerPhaseShift()
+                } }>
                   {this.state.submitting === true && <span className="icon icon-spin ion-md-refresh mr-2"/>}
                   Submit key
                 </Button>
