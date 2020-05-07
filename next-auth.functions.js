@@ -47,7 +47,7 @@ require('dotenv').load()
 // is specified. NeDB is an in-memory only database intended here for testing.
 const MongoClient = require('mongodb').MongoClient
 const NeDB = require('nedb')
-//const MongoObjectId = (process.env.MONGO_URI) ? require('mongodb').ObjectId : (id) => { return id }
+const MongoObjectId = (process.env.MONGO_URI) ? require('mongodb').ObjectId : (id) => { return id }
 
 // Use Node Mailer for email sign in
 const nodemailer = require('nodemailer')
@@ -70,8 +70,7 @@ if (process.env.EMAIL_SERVER && process.env.EMAIL_USERNAME && process.env.EMAIL_
 
 module.exports = () => {
   return new Promise((resolve, reject) => {
-    //if(process.env.MONGO_URI)
-    if (false) {
+    if(process.env.MONGO_URI){
       console.log('connected to mongo database')
       // Connect to MongoDB Database and return user connection
       MongoClient.connect(process.env.MONGO_URI, (err, mongoClient) => {

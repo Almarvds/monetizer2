@@ -25,8 +25,8 @@ const MongoStore = require('connect-mongo')(expressSession)
 // If no store set, NextAuth defaults to using Express Sessions in-memory
 // session store (the fallback is intended as fallback for testing only).
 let sessionStore
-//if(process.env.MONGO_URI)
-if (false) { 
+
+if (process.env.MONGO_URI) { 
   sessionStore = new MongoStore({
      url: process.env.MONGO_URI,
      autoRemove: 'interval',
