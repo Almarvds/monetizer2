@@ -27,7 +27,12 @@ class MonetizerCard extends Component{
 
   connectWithBackend(){
     console.log('attempting to connect with backend');
-    const backEndUrl = "http://localhost:5000/connect"
+    var backEndUrl = '';
+    if(window.location.hostname===localhost){
+      backEndUrl = "http://localhost:8080/connect"
+    } else {
+      backEndUrl =  "https://moneble.ey.r.appspot.com/connect"
+    }
     fetch(backEndUrl)
       .then((res) => res.text())
       .then((text) => {

@@ -62,10 +62,12 @@ export default class extends React.Component {
           <style dangerouslySetInnerHTML={{__html: Styles}}/>
         </Head>
         <Navbar light className="navbar navbar-dark justify-content-between">
-          <Link prefetch href="/">
-            <NavbarBrand href="/">
-              <img src='/static/logo.png' width="30" height="30" style={{marginTop:"-0.3em"}}/> {"Moneble"}
-            </NavbarBrand>
+          <Link href="/">
+            <div>
+              <NavbarBrand href="/">
+                <img src='/static/logo.png' width="30" height="30" style={{marginTop:"-0.3em"}}/> {"Moneble"}
+              </NavbarBrand>
+            </div>
           </Link>
           <Nav className="navbar-nav ml-auto">
             <li className="nav-item">
