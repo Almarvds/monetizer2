@@ -5,7 +5,6 @@ import Page from '../components/page'
 import Layout from '../components/layout'
 import Fade from 'react-reveal/Fade';
 import Cookies from 'universal-cookie'
-import { NextAuth } from 'next-auth/client'
 import Router from 'next/router'
 var Scroll = require('react-scroll');
 var Element = Scroll.Element;
@@ -31,8 +30,9 @@ export default class extends Page {
     })
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault()
+    console.log('email state: ' + this.state.email)
 
     if (!this.state.email) return
 
@@ -40,17 +40,28 @@ export default class extends Page {
       submitting: true
     })
 
+    const emailInput = {
+      emailInput_: this.state.email
+    }
+    var emailURL = window.location.hostname=== 'localhost' ? "http://localhost:8080/signUpEmail" : "https://moneble.ey.r.appspot.com/signUpEmail"
+    fetch(emailURL,{
+      method: 'POST',
+      body:JSON.stringify(emailInput),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+
+
     // Save current URL so user is redirected back here after signing in
     const cookies = new Cookies()
     cookies.set('redirect_url', window.location.pathname, { path: '/' })
 
-    NextAuth.signin(this.state.email)
-    .then(() => {
+    if(true){
       Router.push(`/auth/check-email?email=${this.state.email}`)
-    })
-    .catch(err => {
+    } else {
       Router.push(`/auth/error?action=signin&type=email&email=${this.state.email}`)
-    })
+    }
   }
 
   render() {
@@ -112,6 +123,11 @@ export default class extends Page {
           </Fade>
         </Jumbotron>
         <Container className = '.container-fluid whiteOnBlack' style= {{paddingTop:'35vh'}}>
+          <Row style = {{paddingBottom:'20vh'}}>
+            <Col className = 'text-center'>
+              <h1>A simple 3 step approach to monetization.</h1>
+            </Col>
+          </Row>
           <Row>
             <Col>
               <Fade left duration={2000} distance={'8vh'}>

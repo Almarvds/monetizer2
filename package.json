@@ -49,7 +49,7 @@
     "fsevents": "*"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development PORT=3000 node index.js",
+    "dev": "cross-env NODE_ENV=development next dev",
     "build": "next build",
     "start": "node index.js",
     "postinstall": "next build",

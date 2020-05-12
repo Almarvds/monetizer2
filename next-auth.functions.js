@@ -41,7 +41,7 @@
 
 
 // Load environment variables from a .env file if one exists
-require('dotenv').load()
+require('dotenv').config()
 // This config file uses MongoDB for User accounts, as well as session storage.
 // This config includes options for NeDB, which it defaults to if no DB URI
 // is specified. NeDB is an in-memory only database intended here for testing.
@@ -201,6 +201,7 @@ module.exports = () => {
         email = null,
         url = null,
         } = {}) => {
+          console.log('sending sign in email called')
         nodemailer
         .createTransport(nodemailerTransport)
         .sendMail({
