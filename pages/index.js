@@ -5,11 +5,11 @@ import Page from '../components/page'
 import Layout from '../components/layout'
 import Fade from 'react-reveal/Fade';
 import Cookies from 'universal-cookie'
-import { NextAuth } from 'next-auth/client'
 import Router from 'next/router'
 var Scroll = require('react-scroll');
 var Element = Scroll.Element;
 var scroller = Scroll.scroller;
+
 
 export default class extends Page {
 
@@ -19,7 +19,8 @@ export default class extends Page {
       email: '',
       session: this.props.session,
       providers: this.props.providers,
-      submitting: false
+      submitting: false,
+      emailUsed: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
@@ -27,12 +28,14 @@ export default class extends Page {
 
   handleEmailChange(event) {
     this.setState({
+      emailUsed: false,
       email: event.target.value.trim()
     })
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault()
+    console.log('email state: ' + this.state.email)
 
     if (!this.state.email) return
 
@@ -40,16 +43,33 @@ export default class extends Page {
       submitting: true
     })
 
-    // Save current URL so user is redirected back here after signing in
-    const cookies = new Cookies()
-    cookies.set('redirect_url', window.location.pathname, { path: '/' })
-
-    NextAuth.signin(this.state.email)
-    .then(() => {
-      Router.push(`/auth/check-email?email=${this.state.email}`)
-    })
-    .catch(err => {
-      Router.push(`/auth/error?action=signin&type=email&email=${this.state.email}`)
+    var emailNew=true;
+    const emailInput = {
+      emailInput_: this.state.email
+    }
+    var emailURL = window.location.hostname=== 'localhost' ? "http://localhost:8080/signUpEmail" : "https://moneble.ey.r.appspot.com/signUpEmail"
+    fetch(emailURL,{
+      method: 'POST',
+      body:JSON.stringify(emailInput),
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then((res) => res.text())
+    .then((text) => {
+      var emailNew = JSON.parse(text)
+      var newAddress = emailNew.newAddress
+      console.log(newAddress);
+      if(newAddress){
+        // Save current URL so user is redirected back here after signing in
+        const cookies = new Cookies()
+        cookies.set('redirect_url', window.location.pathname, { path: '/' })
+        Router.push(`/auth/check-email?email=${this.state.email}`)
+      } else {
+        this.setState({
+          emailUsed: true,
+          submitting: false
+        })
+      }
     })
   }
 
@@ -112,6 +132,11 @@ export default class extends Page {
           </Fade>
         </Jumbotron>
         <Container className = '.container-fluid whiteOnBlack' style= {{paddingTop:'35vh'}}>
+          <Row style = {{paddingBottom:'20vh'}}>
+            <Col className = 'text-center'>
+              <h1>A simple 3 step approach to monetization.</h1>
+            </Col>
+          </Row>
           <Row>
             <Col>
               <Fade left duration={2000} distance={'8vh'}>
@@ -125,7 +150,7 @@ export default class extends Page {
               </Fade>
             </Col>
             <Col>
-              <Fade top duration={2000} distance={'8vh'} delay={1500}>
+              <Fade top duration={2000} distance={'8vh'} delay={1000}>
                 <Col>
                   <img src='/static/flags.svg' style={{marginTop:'-10vh',height: '40vh',width:'40vh', marginBottom:'5vh'}}/>
                   <h5><span><img src='/static/numbers-02.png' style={{height: '5vh',width:'5vh', marginRight:'0.8vw'}}/>
@@ -136,7 +161,7 @@ export default class extends Page {
               </Fade>
             </Col>
             <Col>
-              <Fade right duration={2000} distance={'8vh'} delay={3000}>
+              <Fade right duration={2000} distance={'8vh'} delay={2000}>
                 <Col>
                   <img src='/static/YouTube_monetization.png' style={{height: '40vh',width:'40vh', marginBottom:'5vh'}}/>
                   <h5><span><img src='/static/numbers-03.png' style={{height: '5vh',width:'5vh', marginRight:'0.8vw'}}/>
@@ -159,10 +184,15 @@ export default class extends Page {
                 <p className="text-center">
                   <Label htmlFor="email">Enter your Email address</Label><br/>
                   <Input name="email" style={{width:'30vw',marginLeft:'3.5vw'}} disabled={this.state.submitting} type="text" placeholder="i.love.moneble@example.com" id="email" className="form-control" value={this.state.email} onChange={this.handleEmailChange}/>
+                  <Fade bottom collapse when={this.state.emailUsed}>
+                    <div className="invalid-feedback" style={{ color:'white',display: 'block', marginTop:'1vh'}}>
+                      This email is already signed up
+                    </div>
+                  </Fade>
                 </p>
                 <p className="text-center">
                   <Button id="submitButton" disabled={this.state.submitting} outline color="light" type="submit">
-                    {this.state.submitting === true && <span className="icon icon-spin ion-md-refresh mr-2"/>}
+                    {this.state.submitting === true && <span className="icon icon-spin">🎬</span>}
                     Sign me up!
                   </Button>
                 </p>

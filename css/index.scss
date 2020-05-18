@@ -74,6 +74,7 @@ background-color: #192119;
 .icon-spin {
   display: inline-block;
   animation: spin 1s infinite linear;
+  margin-right: 0.5vw;
 }
 @keyframes spin {
   0% {

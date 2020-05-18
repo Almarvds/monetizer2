@@ -27,12 +27,7 @@ class MonetizerCard extends Component{
 
   connectWithBackend(){
     console.log('attempting to connect with backend');
-    var backEndUrl = '';
-    if(window.location.hostname===localhost){
-      backEndUrl = "http://localhost:8080/connect"
-    } else {
-      backEndUrl =  "https://moneble.ey.r.appspot.com/connect"
-    }
+    var backEndUrl = window.location.hostname=== 'localhost' ? "http://localhost:8080/connect" : "https://moneble.ey.r.appspot.com/connect"
     fetch(backEndUrl)
       .then((res) => res.text())
       .then((text) => {
@@ -81,12 +76,6 @@ class MonetizerCard extends Component{
           } >
           Skip <
           /button>
-          <button className = "btn btn-dark" //TODO: remove this skip button
-          onClick = {
-            this.connectWithBackend
-          } >
-          Connect <
-          /button>
         </div>
       </div>
     )
@@ -117,7 +106,7 @@ class MonetizerCard extends Component{
 
   render() {
       return (
-        <div className="card text-center mx-auto" style = {{width:"70vw", height:"40vw", borderRadius: "10px",
+        <div className="card text-center mx-auto" style = {{width:"70vw", borderRadius: "10px",
           background: "#ffffff"
           //boxShadow:  "11px 11px 19px rgba(0,0,0,0.2), -11px -11px 19px rgba(255,255,255,0.1)"
           }}>
