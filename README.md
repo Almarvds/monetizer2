@@ -1,2 +1,2 @@
-# next-starter
-a next starter
+# Moneble project
+This repo includes the front-end of the Moneble project, a tool for leveraging AI to help content creators produce monetizable content. The project was created on the basis that a lot of creators have trouble conforming or agreeing with platform guidelines, leaving them in need for added transparency. This tool provides a solution by allowing them an insight in what makes videos advertiser friendly and thus recommendable, going as far as showing the snippets in their content that would cause it to be flaffed as not being such. 
