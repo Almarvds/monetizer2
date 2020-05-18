@@ -78,11 +78,12 @@ export default class extends Page {
       <Layout {...this.props} navmenu={false} container={false}>
         <link rel="shortcut icon" href="/static/favicon.ico" />
         <Jumbotron className="text-light rounded-0 noMargin" style={{
-          backgroundColor: 'rgba(73,155,234,1)',
-          background: 'url(/static/bg2_2.png)',
-          //background: 'radial-gradient(ellipse at center, #009E45 0%, #00b74f 100%)',
-          backgroundSize: 'cover',
-          boxShadow: 'inset 0px -119px 77px -10px rgba(25,33,25,1)',
+          //background: '#57B751',
+          background: 'url(/static/logo.png)',
+          backgroundSize: 'contain',
+          backgroundPosition: 'right',
+          backgroundRepeat: 'no-repeat',
+          boxShadow: 'inset 0px -100px 300px 250px rgba(25,33,25,1)',
           paddingBottom: '20vh'
         }}>
           <Fade top duration={2000} distance={'8vh'}>

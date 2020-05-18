@@ -4,7 +4,7 @@ import React, {
 import Dropzone from '../dropzone/Dropzone'
 import Progress from '../progress/Progress'
 
-var firebase = require('firebase');
+var firebase = require('firebase/app');
 var storage = '';
 // Add the Firebase products that you want to use
 require('firebase/storage');
