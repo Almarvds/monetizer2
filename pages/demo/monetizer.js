@@ -14,7 +14,6 @@ export default class extends Page {
         <Jumbotron className="text-light rounded-0 noMargin" style={{
           backgroundColor: '#192119', //options: #111F12
           backgroundSize:'cover',
-          height: "100vh",
           }}>
           <MonetizerCard/>
         </Jumbotron>
