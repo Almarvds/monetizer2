@@ -156,7 +156,7 @@ class Upload extends Component {
   render() {
       return (
         <div className = "Upload" style={{marginTop:"5vh"}}>
-          <div className = "Content mx-auto" style={{width:"60vw", marginBottom:"2vh", color:"black"}}>
+          <div className = "Content mx-auto" style={{width:"60vw", color:"black"}}>
             <div>
               <Dropzone onFilesAdded = {this.onFilesAdded} disabled = {
               this.state.uploading || this.state.successfullUploaded}/>

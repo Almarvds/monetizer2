@@ -63,11 +63,13 @@ export default class extends React.Component {
                 <Input name="_csrf" type="hidden" value={this.state.session.csrfToken}/>
                 <p>
                   <Label htmlFor="email">Email address</Label><br/>
-                  <Input name="email" disabled={this.state.submitting} type="text" placeholder="a.v.d.stappen@example.com" id="email" className="form-control" value={this.state.email} onChange={this.handleEmailChange}/>
+                  <Input name="email" disabled={this.state.submitting} type="text"
+                  placeholder="a.v.d.stappen@example.com" id="email" className="form-control"
+                  value={this.state.email} onChange={this.handleEmailChange}/>
                 </p>
                 <p className="text-right">
                   <Button id="submitButton" disabled={this.state.submitting} outline color="dark" type="submit">
-                    {this.state.submitting === true && <span className="icon icon-spin ion-md-refresh mr-2"/>}
+                    {this.state.submitting === true && <span className="icon icon-spin">🎬</span>}
                     Sign in with email
                   </Button>
                 </p>
