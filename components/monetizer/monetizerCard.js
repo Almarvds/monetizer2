@@ -5,14 +5,17 @@ import React, {
 import Upload from "./upload.js"
 import Analyze from "./analyze.js"
 import BetaAccess from "./betaAccess.js"
+import Results from "./results.js"
 
 class MonetizerCard extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      renderPhase: this.renderLogin()
+      renderPhase: this.renderResults()
     };
     this.setAnalyzePhase = this.setAnalyzePhase.bind(this);
+    this.setUploadPhase = this.setUploadPhase.bind(this);
+    this.setResultsPhase = this.setResultsPhase.bind(this);
   }
 
   setAnalyzePhase = (event) => {
@@ -25,9 +28,14 @@ class MonetizerCard extends Component{
       this.setState({renderPhase: this.renderUpload()});
   }
 
+  setResultsPhase = (event) => {
+    console.log('set phase to upload');
+    this.setState({renderPhase: this.renderResults()});
+  }
+
   connectWithBackend(){
     console.log('attempting to connect with backend');
-    var backEndUrl = window.location.hostname=== 'localhost' ? "http://localhost:8080/connect" : "https://moneble.ey.r.appspot.com/connect"
+    var backEndUrl = window.location.hostname=== 'localhost' ? `${process.env.server_url}connect` : `${process.env.server_url}connect`
     fetch(backEndUrl)
       .then((res) => res.text())
       .then((text) => {
@@ -99,6 +107,35 @@ class MonetizerCard extends Component{
         </div>
         <div className="card-body">
           <Analyze/>
+          <button className = "btn btn-dark" //TODO: remove this skip button
+          onClick = {
+            this.setResultsPhase
+          } >
+          Skip <
+          /button>
+        </div>
+      </div>
+    )
+  }
+
+  renderResults(){
+    return(
+      <div>
+        <div className="card-header">
+          <ul className="nav nav-tabs card-header-tabs">
+            <li className="nav-item">
+              <a className="nav-link" href="#" onClick={this.setUploadPhase}>Upload</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#" onClick={this.setAnalyzePhase}>Analyze</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link active" href="#">Results</a>
+            </li>
+          </ul>
+        </div>
+        <div className="card-body">
+          <Results/>
         </div>
       </div>
     )

@@ -40,7 +40,7 @@ class Upload extends Component {
       FirebaseUrl_: url
     }
     console.log(JSON.stringify(firebaseURL));
-    var transferURL = window.location.hostname=== 'localhost' ? "http://localhost:8080/upload" : "https://moneble.ey.r.appspot.com/upload"
+    var transferURL = window.location.hostname=== 'localhost' ? `${process.env.server_url}/upload` : `${process.env.server_url}/upload`
     fetch(transferURL,{
       method: 'POST',
       body:JSON.stringify(firebaseURL),
@@ -56,7 +56,7 @@ class Upload extends Component {
       uploading: true
     });
     const promises = [];
-    var backEndUrl = window.location.hostname=== 'localhost' ? "http://localhost:8080/connect" : "https://moneble.ey.r.appspot.com/connect"
+    var backEndUrl = window.location.hostname=== 'localhost' ? `${process.env.server_url}connect` : `${process.env.server_url}connect`
     fetch(backEndUrl)
       .then((res) => res.text())
       .then((text) => {

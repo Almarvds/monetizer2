@@ -9,7 +9,7 @@ import Router from 'next/router'
 var Scroll = require('react-scroll');
 var Element = Scroll.Element;
 var scroller = Scroll.scroller;
-
+console.log(process.env.server_url);
 
 export default class extends Page {
 
@@ -47,7 +47,7 @@ export default class extends Page {
     const emailInput = {
       emailInput_: this.state.email
     }
-    var emailURL = window.location.hostname=== 'localhost' ? "http://localhost:8080/signUpEmail" : "https://moneble.ey.r.appspot.com/signUpEmail"
+    var emailURL = `${process.env.server_url}signUpEmail`
     fetch(emailURL,{
       method: 'POST',
       body:JSON.stringify(emailInput),
@@ -180,9 +180,9 @@ export default class extends Page {
           <Container  className = '.container-fluid whiteOnBlack' id='subForm' style= {{marginTop:'25vh'}}>
             <div>
                 <h2 className="text-center" style = {{paddingBottom: '5vh', color: '#57B751'}}> Sign up for our release or participate in the beta! </h2>
-              <Form style={{width:'50%',
+              <Form className="text-center" style={{width:'50%',
     margin:'0 auto'}}id="signin" method="post" action="/auth/email/signin" onSubmit={this.handleSubmit}>
-                <p className="text-center">
+                <p>
                   <Label htmlFor="email">Enter your Email address</Label><br/>
                   <Input name="email" style={{width:'30vw',marginLeft:'3.5vw'}} disabled={this.state.submitting} type="text" placeholder="i.love.moneble@example.com" id="email" className="form-control" value={this.state.email} onChange={this.handleEmailChange}/>
                   <Fade bottom collapse when={this.state.emailUsed}>
@@ -191,7 +191,7 @@ export default class extends Page {
                     </div>
                   </Fade>
                 </p>
-                <p className="text-center">
+                <p>
                   <Button id="submitButton" disabled={this.state.submitting} outline color="light" type="submit">
                     {this.state.submitting === true && <span className="icon icon-spin">🎬</span>}
                     Sign me up!

@@ -27,7 +27,8 @@ class BetaAccess extends Component {
   }
 
   async handleSubmit(event){
-    var tokenVerifyUrl = window.location.hostname === 'localhost' ? "http://localhost:8080/verifyBetaToken" : "https://moneble.ey.r.appspot.com/verifyBetaToken"
+    var tokenVerifyUrl = window.location.hostname === 'localhost' ? `${process.env.server_url}verifyBetaToken` : `${process.env.server_url}verifyBetaToken`
+    console.log(tokenVerifyUrl)
     const token = {
       token_: this.state.key
     }
