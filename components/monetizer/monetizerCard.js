@@ -5,7 +5,9 @@ import React, {
 import Upload from "./upload.js"
 import Analyze from "./analyze.js"
 import BetaAccess from "./betaAccess.js"
-import Results from "./results.js"
+import Results from "./results/results.js"
+import { Container, Row, Col } from 'reactstrap'
+
 
 class MonetizerCard extends Component{
   constructor(props) {
@@ -16,21 +18,31 @@ class MonetizerCard extends Component{
     this.setAnalyzePhase = this.setAnalyzePhase.bind(this);
     this.setUploadPhase = this.setUploadPhase.bind(this);
     this.setResultsPhase = this.setResultsPhase.bind(this);
+    this.setFinishedPhase = this.setFinishedPhase.bind(this);
   }
 
   setAnalyzePhase = (event) => {
       console.log('set phase to analysis');
+      document.getElementById("monebleProgress").src = '/static/Webcoin2-02 - Copy.svg';
       this.setState({renderPhase: this.renderAnalyze()});
   }
 
   setUploadPhase = (event) => {
       console.log('set phase to upload');
+      document.getElementById("monebleProgress").src = '/static/Webcoin2-01 - Copy.svg';
       this.setState({renderPhase: this.renderUpload()});
   }
 
   setResultsPhase = (event) => {
     console.log('set phase to upload');
+    document.getElementById("monebleProgress").src = '/static/Webcoin2-03 - Copy.svg';
     this.setState({renderPhase: this.renderResults()});
+  }
+
+  setFinishedPhase = (event) => {
+      console.log('set phase to analysis');
+      document.getElementById("monebleProgress").src = '/static/Webcoin2-04 - Copy.svg';
+      this.setState({renderPhase: this.renderFinished()});
   }
 
   connectWithBackend(){
@@ -46,13 +58,6 @@ class MonetizerCard extends Component{
   renderLogin(){
     return(
       <div>
-        <div className="card-header">
-          <ul className="nav nav-tabs card-header-tabs">
-            <li className="nav-item">
-              <a className="nav-link active" href="#">Login</a>
-            </li>
-          </ul>
-        </div>
         <div className="card-body">
           <BetaAccess triggerPhaseShift={this.setUploadPhase}/>
         </div>
@@ -63,19 +68,6 @@ class MonetizerCard extends Component{
   renderUpload(){
     return(
       <div>
-        <div className="card-header">
-          <ul className="nav nav-tabs card-header-tabs">
-            <li className="nav-item">
-              <a className="nav-link active" href="#">Upload</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link disabled" href="#">Analyze</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link disabled" href="#">Results</a>
-            </li>
-          </ul>
-        </div>
         <div className="card-body">
           <Upload triggerPhaseShift={this.setAnalyzePhase}/>
           <button className = "btn btn-dark" //TODO: remove this skip button
@@ -92,19 +84,6 @@ class MonetizerCard extends Component{
   renderAnalyze(){
     return(
       <div>
-        <div className="card-header">
-          <ul className="nav nav-tabs card-header-tabs">
-            <li className="nav-item">
-              <a className="nav-link" href="#" onClick={this.setUploadPhase}>Upload</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link active" href="#">Analyze</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link disabled" href="#">Results</a>
-            </li>
-          </ul>
-        </div>
         <div className="card-body">
           <Analyze/>
           <button className = "btn btn-dark" //TODO: remove this skip button
@@ -112,6 +91,12 @@ class MonetizerCard extends Component{
             this.setResultsPhase
           } >
           Skip <
+          /button>
+          <button className = "btn btn-dark" //TODO: remove this skip button
+          onClick = {
+            this.setUploadPhase
+          } >
+          Back <
           /button>
         </div>
       </div>
@@ -121,32 +106,48 @@ class MonetizerCard extends Component{
   renderResults(){
     return(
       <div>
-        <div className="card-header">
-          <ul className="nav nav-tabs card-header-tabs">
-            <li className="nav-item">
-              <a className="nav-link" href="#" onClick={this.setUploadPhase}>Upload</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#" onClick={this.setAnalyzePhase}>Analyze</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link active" href="#">Results</a>
-            </li>
-          </ul>
-        </div>
         <div className="card-body">
           <Results/>
         </div>
+        <button className = "btn btn-dark" //TODO: remove this skip button
+        onClick = {
+          this.setFinishedPhase
+        } >
+        Skip <
+        /button>
+        <button className = "btn btn-dark" //TODO: remove this skip button
+        onClick = {
+          this.setAnalyzePhase
+        } >
+        Back <
+        /button>
+      </div>
+    )
+  }
+
+  renderFinished(){
+    return(
+      <div>
+        <div className="card-body">
+          <Results/>
+        </div>
+        <button className = "btn btn-dark" //TODO: remove this skip button
+        onClick = {
+          this.setResultsPhase
+        } >
+        Back <
+        /button>
       </div>
     )
   }
 
   render() {
       return (
-        <div className="card text-center mx-auto" style = {{width:"70vw", borderRadius: "10px",
-          background: "#ffffff"
-          //boxShadow:  "11px 11px 19px rgba(0,0,0,0.2), -11px -11px 19px rgba(255,255,255,0.1)"
+        <div className="card text-center mx-auto"style = {{width:"70vw", borderRadius: "10px",
+          background: "#ffffff",
           }}>
+          <img id='monebleProgress' className = "mx-auto card-img-top" src='/static/Webcoin2-01 - Copy.svg'
+          style={{width:'65vw',height:'10vh'}} alt="Card image cap"/>
           <div> {this.state.renderPhase} </div>
         </div>
       )
