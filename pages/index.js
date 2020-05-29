@@ -133,9 +133,9 @@ export default class extends Page {
           </Fade>
         </Jumbotron>
         <Container className = '.container-fluid whiteOnBlack' style= {{paddingTop:'35vh'}}>
-          <Row style = {{paddingBottom:'20vh'}}>
+          <Row style = {{paddingBottom:'15vh'}}>
             <Col className = 'text-center'>
-              <h1>A simple 3 step approach to monetization.</h1>
+              <h1>A simple 3 step approach to monetization and recommendation.</h1>
             </Col>
           </Row>
           <Row>
@@ -167,7 +167,7 @@ export default class extends Page {
                   <img src='/static/YouTube_monetization.png' style={{height: '40vh',width:'40vh', marginBottom:'5vh'}}/>
                   <h5><span><img src='/static/numbers-03.png' style={{height: '5vh',width:'5vh', marginRight:'0.8vw'}}/>
                   </span>Guarantee your paycheck</h5>
-                  <p>Secure your income by making changes based on your results,
+                  <p>Secure your income and make sure your content gets recommended by making changes based on your results,
                   or use them to challenge the decision making of the platform.</p>
                   <div style={{height:'50vh'}}/>
                 </Col>
@@ -175,9 +175,15 @@ export default class extends Page {
             </Col>
           </Row>
         </Container>
+        <Fade top duration={2000} distance={'8vh'}>
+          <div className='text-center' style={{color:'white'}}>
+          <img src='/static/screens3 - Copy.svg' style={{width:'90vw'}}/>
+          <h4>Perfect your video using the audio checker as well as the frame by frame mode.</h4>
+          </div>
+        </Fade>
         <Element name="myScrollToElement"></Element>
         <Fade top duration={2000} distance={'8vh'}>
-          <Container  className = '.container-fluid whiteOnBlack' id='subForm' style= {{marginTop:'25vh'}}>
+          <Container  className = '.container-fluid whiteOnBlack' id='subForm' style= {{marginTop:'45vh'}}>
             <div>
                 <h2 className="text-center" style = {{paddingBottom: '5vh', color: '#57B751'}}> Sign up for our release or participate in the beta! </h2>
               <Form className="text-center" style={{width:'50%',
