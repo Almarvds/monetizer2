@@ -13,7 +13,7 @@ class MonetizerCard extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      renderPhase: this.renderResults()
+      renderPhase: this.renderLogin()
     };
     this.setAnalyzePhase = this.setAnalyzePhase.bind(this);
     this.setUploadPhase = this.setUploadPhase.bind(this);

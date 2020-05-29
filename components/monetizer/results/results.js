@@ -11,7 +11,7 @@ class Results extends Component {
     super(props);
     console.log(props);
     this.state = {
-      renderTab: <VideoResults/>
+      renderTab: <MainResults/>
     };
   }
 

@@ -36,7 +36,7 @@ class MainResults extends Component {
                 <span style={{color: "#39b54a", fontWeight:'bold'}}> safe!</span>
               </h6>
               <div className="col-md-auto progress mx-auto" style={{ marginTop:'2vh', marginBottom:'2vh', padding:'0'}}>
-                <div className="progress-bar bg-success" role="progressbar" style={{width: `94%`,
+                <div className="progress-bar" role="progressbar" style={{backgroundColor:'#57B751', width: `94%`,
                 ariaValuenow:`100`, ariaValuemin:"0", ariaValuemax:"100"}}>94%</div>
               </div>
               <div className="text-left">

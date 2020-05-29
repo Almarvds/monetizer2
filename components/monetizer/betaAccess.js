@@ -50,6 +50,11 @@ class BetaAccess extends Component {
         this.setState({
           invalid: this.state.invalid-1
         })
+        if(this.state.invalid===0){
+          console.log('should be blocked')
+          document.getElementById('blockText').innerHTML = 'blocked'
+          document.getElementById('keySubmitButton').disabled = true
+        }
       }
       this.setState({
         changeHandled: false
@@ -72,7 +77,7 @@ class BetaAccess extends Component {
                 style={{width:'5vw', margin: '0 auto' , textAlign: 'center' }}/>
               </p>
               <Fade bottom collapse when={this.state.invalid<4 && !this.state.changeHandled}>
-                <div className="invalid-feedback" style={{ display: 'block', marginTop:'1vh', marginBottom:'2vh'}}>
+                <div id='blockText' className="invalid-feedback" style={{ display: 'block', marginTop:'1vh', marginBottom:'2vh'}}>
                   Sorry, this key is incorrect, you are allowed {this.state.invalid} more attempts
                 </div>
               </Fade>
