@@ -1,9 +1,9 @@
 import React, {
   Component
 } from 'react'
-import MainResults from './MainResults.js'
-import VideoResults from './VideoResults.js'
-import AudioResults from './AudioResults.js'
+import MainResults from './mainResults.js'
+import VideoResults from './videoResults.js'
+import AudioResults from './audioResults.js'
 
 
 class Results extends Component {
