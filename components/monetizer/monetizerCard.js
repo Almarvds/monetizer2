@@ -22,36 +22,30 @@ class MonetizerCard extends Component{
   }
 
   setAnalyzePhase = (event) => {
-      console.log('set phase to analysis');
       document.getElementById("monebleProgress").src = '/static/Webcoin2-02 - Copy.svg';
       this.setState({renderPhase: this.renderAnalyze()});
   }
 
   setUploadPhase = (event) => {
-      console.log('set phase to upload');
       document.getElementById("monebleProgress").src = '/static/Webcoin2-01 - Copy.svg';
       this.setState({renderPhase: this.renderUpload()});
   }
 
   setResultsPhase = (event) => {
-    console.log('set phase to upload');
     document.getElementById("monebleProgress").src = '/static/Webcoin2-03 - Copy.svg';
     this.setState({renderPhase: this.renderResults()});
   }
 
   setFinishedPhase = (event) => {
-      console.log('set phase to analysis');
       document.getElementById("monebleProgress").src = '/static/Webcoin2-04 - Copy.svg';
       this.setState({renderPhase: this.renderFinished()});
   }
 
   connectWithBackend(){
-    console.log('attempting to connect with backend');
     var backEndUrl = window.location.hostname=== 'localhost' ? `${process.env.server_url}connect` : `${process.env.server_url}connect`
     fetch(backEndUrl)
       .then((res) => res.text())
       .then((text) => {
-        console.log(text);
       });
   }
 

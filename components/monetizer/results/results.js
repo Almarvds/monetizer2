@@ -9,7 +9,6 @@ import AudioResults from './audioResults.js'
 class Results extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       renderTab: <MainResults/>
     };
