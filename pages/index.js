@@ -9,7 +9,6 @@ import Router from 'next/router'
 var Scroll = require('react-scroll');
 var Element = Scroll.Element;
 var scroller = Scroll.scroller;
-console.log(process.env.server_url);
 
 export default class extends Page {
 
@@ -35,7 +34,6 @@ export default class extends Page {
 
   async handleSubmit(event) {
     event.preventDefault()
-    console.log('email state: ' + this.state.email)
 
     if (!this.state.email) return
 
@@ -58,7 +56,6 @@ export default class extends Page {
     .then((text) => {
       var emailNew = JSON.parse(text)
       var newAddress = emailNew.newAddress
-      console.log(newAddress);
       if(newAddress){
         // Save current URL so user is redirected back here after signing in
         const cookies = new Cookies()
@@ -175,7 +172,7 @@ export default class extends Page {
             </Col>
           </Row>
         </Container>
-        <Fade top duration={2000} distance={'8vh'}>
+        <Fade top duration={4000} distance={'8vh'}>
           <div className='text-center' style={{color:'white'}}>
           <img src='/static/screens3 - Copy.svg' style={{width:'90vw'}}/>
           <h4>Perfect your video using the audio checker as well as the frame by frame mode.</h4>

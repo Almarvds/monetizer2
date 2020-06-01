@@ -7,7 +7,6 @@ import Fade from 'react-reveal/Fade';
 class MainResults extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
   }
 
   render() {

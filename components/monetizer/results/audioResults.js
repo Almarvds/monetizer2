@@ -13,7 +13,6 @@ class AudioResults extends Component {
       flagCause: 'light profanity',
       sentence: 'this game is fucking awesome'
     };
-    console.log(props);
   }
 
   render() {

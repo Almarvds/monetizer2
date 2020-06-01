@@ -46,7 +46,7 @@ export default class extends React.Component {
     }
 
     this.setState({
-      providers: this.state.providers || await NextAuth.providers(),
+      providers: this.state.providers || [],
       modal: !this.state.modal
     })
   }

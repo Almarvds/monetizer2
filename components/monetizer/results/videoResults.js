@@ -8,7 +8,6 @@ import Fade from 'react-reveal/Fade';
 class VideoResults extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
   }
 
 

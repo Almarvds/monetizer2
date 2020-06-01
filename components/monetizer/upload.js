@@ -12,7 +12,6 @@ require('firebase/storage');
 class Upload extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       response: null,
       files: [],
@@ -39,7 +38,6 @@ class Upload extends Component {
     const firebaseURL = {
       FirebaseUrl_: url
     }
-    console.log(JSON.stringify(firebaseURL));
     var transferURL = window.location.hostname=== 'localhost' ? `${process.env.server_url}/upload` : `${process.env.server_url}/upload`
     fetch(transferURL,{
       method: 'POST',
@@ -188,17 +186,13 @@ class Upload extends Component {
 
  function fileAccepted(file){
   var fileExtension = file.name.split('.').pop();
-  console.log("File uploaded of type: " + fileExtension);
   if(fileExtension === "jpg" || fileExtension === "png"){
-    console.log("image file type accepted");
     resultsLink = "/resultsthumbnail";
     return true;
   } else if(fileExtension === "mp4") {
-    console.log("video file type accepted");
     resultsLink = "/resultsvideo";
     return true;
   } else {
-    console.log("file type not accepted");
     return false;
     }
   }

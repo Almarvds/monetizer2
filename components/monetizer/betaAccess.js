@@ -8,7 +8,6 @@ import { Row, Col, Form, Input, Label, Button } from 'reactstrap'
 class BetaAccess extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       key: '',
       submitting: false,
@@ -28,7 +27,6 @@ class BetaAccess extends Component {
 
   async handleSubmit(event){
     var tokenVerifyUrl = window.location.hostname === 'localhost' ? `${process.env.server_url}verifyBetaToken` : `${process.env.server_url}verifyBetaToken`
-    console.log(tokenVerifyUrl)
     const token = {
       token_: this.state.key
     }
@@ -42,8 +40,6 @@ class BetaAccess extends Component {
     .then((res) => res.text())
     .then((text) => {
       var response = JSON.parse(text)
-      console.log(response);
-      console.log(response.access);
       if(response.access === true){
         this.props.triggerPhaseShift()
       } else {
@@ -51,7 +47,6 @@ class BetaAccess extends Component {
           invalid: this.state.invalid-1
         })
         if(this.state.invalid===0){
-          console.log('should be blocked')
           document.getElementById('blockText').innerHTML = 'blocked'
           document.getElementById('keySubmitButton').disabled = true
         }
